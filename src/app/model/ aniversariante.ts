@@ -1,5 +1,5 @@
-
 export interface Aniversariante {
-    name: string;
-    birthday: string;
-  }
+  id: number;
+  name: string;
+  birthday: string;
+}
