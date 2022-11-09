@@ -7,7 +7,7 @@ import { Aniversariante } from '../../model/ aniversariante';
   providedIn: 'root',
 })
 export class AniversariantesService {
-  private readonly API = 'http://localhost:3000/graphql';
+  private readonly API = 'http://localhost:3000/aniversariantes';
   constructor(private http: HttpClient) {}
 
   list(): Observable<Aniversariante[]> {
