@@ -22,8 +22,11 @@
     "@angular/router": "^14.2.0",
     "classic": "^0.0.2",
     "code": "^5.2.4",
+    "reflect-metadata": "^0.1.13",
     "rxjs": "~7.5.0",
+    "sqlite3": "^5.1.2",
     "tslib": "^2.3.0",
+    "typeorm": "^0.3.10",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -31,6 +34,7 @@
     "@angular/cli": "~14.2.8",
     "@angular/compiler-cli": "^14.2.0",
     "@types/jasmine": "~4.0.0",
+    "@types/node": "^18.11.9",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
