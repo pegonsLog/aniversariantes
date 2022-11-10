@@ -5,10 +5,11 @@ import { SharedModule } from '../shared/shared.module';
 
 import { AniversariantesRoutingModule } from './aniversariantes-routing.module';
 import { ListComponent } from './list/list.component';
+import { FormComponent } from './form/form.component';
 
 @NgModule({
-  declarations: [ListComponent],
+  declarations: [ListComponent, FormComponent],
   imports: [CommonModule, AniversariantesRoutingModule, AngularMaterialModule, SharedModule],
-  exports: [ListComponent],
+  exports: [ListComponent, FormComponent],
 })
 export class AniversariantesModule {}
