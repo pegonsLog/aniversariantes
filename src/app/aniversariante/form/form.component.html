@@ -1,7 +1,17 @@
-<button
-  mat-raised-button
-  color="primary"
-  (click)="create({ id: 6, name: 'Denis', birthday: '28/09' })"
->
-  Primary
-</button>
+<mat-card>
+  <form [formGroup]="form">
+    <mat-toolbar color="primary">Adicionar aniversariantes</mat-toolbar>
+    <mat-form-field appearance="legacy">
+      <input matInput placeholder="Nome" />
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <input matInput placeholder="Dia do aniversário" />
+    </mat-form-field>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Salvar</button>
+      <button mat-raised-button>Cancelar</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

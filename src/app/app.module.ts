@@ -21,7 +21,7 @@ import { SharedModule } from './shared/shared.module';
     AngularMaterialModule,
     AniversariantesModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
