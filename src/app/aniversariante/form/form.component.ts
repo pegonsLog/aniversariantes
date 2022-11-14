@@ -1,27 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Aniversariante } from 'src/app/model/aniversariante';
-import { AniversariantesService } from '../aniversariantes.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { AniversariantesService } from '../aniversariantes.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
-export class FormComponent implements OnInit {
-
+export class FormComponent {
   form: FormGroup;
-  constructor(private aniversarianteService: AniversariantesService, private fb: FormBuilder) {
-    this.form = fb.group({
+  constructor(
+    private aniversarianteService: AniversariantesService,
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar
+  ) {
+    this.form = formBuilder.group({
       name: [null],
-      birthday: [null]
-    })
+      birthday: [null],
+    });
   }
 
-  create(aniversariante: Aniversariante) {
-    this.aniversarianteService.create(aniversariante);
+  onCancel() {
+    console.log('Botão cancelar clicado');
   }
 
-  ngOnInit(): void {}
+  onSubmit() {
+    this.aniversarianteService.save(this.form.value);
+  }
 }

@@ -18,7 +18,11 @@ export class AniversariantesService {
 
     );
   }
-  create(aniversariante: Aniversariante){
-    return this.http.post<Aniversariante>(this.API + 'aniversariante', aniversariante);
+  save(record: Aniversariante){
+    return this.http.post<Aniversariante>(this.API  + 'aniversariantes', record).pipe(first());
+  }
+
+  delete(id: number){
+    return this.http.delete<Aniversariante>(this.API + 'aniversariantes').pipe(first());
   }
 }

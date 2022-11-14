@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Observable, of } from 'rxjs';
 import { Aniversariante } from 'src/app/model/aniversariante';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { AniversariantesService } from '../aniversariantes.service';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-aniversariantes',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
   aniversariantes$: Observable<Aniversariante[]>;
   displayedColumns: string[] = ['name', 'birthday', 'actions'];
 
@@ -36,7 +36,14 @@ export class ListComponent implements OnInit {
   }
 
   onAdd() {
-    this.router.navigate(['new'], {relativeTo: this.activatedRoute})
+    this.router.navigate(['new'], { relativeTo: this.activatedRoute });
   }
-  ngOnInit(): void {}
+
+  onDelete(id: number) {
+    this.aniversariantesService
+      .delete(id)
+      .subscribe((result) =>
+        console.log('O aniversariante foi excluído com sucesso')
+      );
+  }
 }
