@@ -13,7 +13,7 @@ import { AniversariantesService } from '../aniversariantes.service';
 })
 export class ListComponent {
   aniversariantes$: Observable<Aniversariante[]>;
-  displayedColumns: string[] = ['name', 'birthday', 'actions'];
+  readonly displayedColumns: string[] = ['name', 'birthday', 'actions'];
 
   constructor(
     public dialog: MatDialog,
@@ -39,11 +39,4 @@ export class ListComponent {
     this.router.navigate(['new'], { relativeTo: this.activatedRoute });
   }
 
-  onDelete(id: number) {
-    this.aniversariantesService
-      .delete(id)
-      .subscribe((result) =>
-        console.log('O aniversariante foi excluído com sucesso')
-      );
-  }
 }

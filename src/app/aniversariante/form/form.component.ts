@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AniversariantesService } from '../aniversariantes.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -11,17 +10,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent {
-  form: FormGroup;
+  form: FormGroup = this.formBuilder.group({
+    name: [null],
+    birthday: [null],
+  });
+
   constructor(
     private aniversarianteService: AniversariantesService,
-    private formBuilder: FormBuilder,
+    private formBuilder: NonNullableFormBuilder,
     private snackBar: MatSnackBar
-  ) {
-    this.form = formBuilder.group({
-      name: [null],
-      birthday: [null],
-    });
-  }
+  ) {}
 
   onCancel() {
     console.log('Botão cancelar clicado');
