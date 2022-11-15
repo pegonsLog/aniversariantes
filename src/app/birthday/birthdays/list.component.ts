@@ -1,27 +1,26 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { catchError, Observable, of } from 'rxjs';
-import { Aniversariante } from 'src/app/model/aniversariante';
+import { Birthday } from 'src/app/model/birthday';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
-import { AniversariantesService } from '../aniversariantes.service';
+import { BirthdaysService } from '../birthdays.service';
 
 @Component({
-  selector: 'app-aniversariantes',
+  selector: 'app-birthdays',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  aniversariantes$: Observable<Aniversariante[]>;
-  readonly displayedColumns: string[] = ['name', 'birthday', 'actions'];
+  birthdays$: Observable<Birthday[]>;
 
   constructor(
     public dialog: MatDialog,
-    private aniversariantesService: AniversariantesService,
+    private birthdaysService: BirthdaysService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    this.aniversariantes$ = this.aniversariantesService.list().pipe(
+    this.birthdays$ = this.birthdaysService.list().pipe(
       catchError(() => {
         this.onError('Erro ao carregar aniversariantes');
         return of([]);
@@ -38,5 +37,4 @@ export class ListComponent {
   onAdd() {
     this.router.navigate(['new'], { relativeTo: this.activatedRoute });
   }
-
 }

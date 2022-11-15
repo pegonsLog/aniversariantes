@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
+import { NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { AniversariantesService } from '../aniversariantes.service';
+import { BirthdaysService } from '../birthdays.service';
 
 @Component({
   selector: 'app-form',
@@ -10,13 +10,13 @@ import { AniversariantesService } from '../aniversariantes.service';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent {
-  form: FormGroup = this.formBuilder.group({
-    name: [null],
-    birthday: [null],
+  form = this.formBuilder.group({
+    name: [''],
+    birthday: [''],
   });
 
   constructor(
-    private aniversarianteService: AniversariantesService,
+    private birthdaysService: BirthdaysService,
     private formBuilder: NonNullableFormBuilder,
     private snackBar: MatSnackBar
   ) {}
@@ -26,6 +26,10 @@ export class FormComponent {
   }
 
   onSubmit() {
-    this.aniversarianteService.save(this.form.value);
+    this.birthdaysService.save(this.form.value).subscribe((result) => this.onSuccess());
+  }
+
+  onSuccess(){
+    this.snackBar.open('Registro inserido com sucesso')
   }
 }

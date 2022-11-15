@@ -1,0 +1,59 @@
+<mat-table [dataSource]="birthdays" class="mat-elevation-z8">
+  <!-- Name Column -->
+  <ng-container
+    matColumnDef="name"
+    aria-label="Campo de nome do funcionário"
+  >
+    <mat-header-cell *matHeaderCellDef>Aniversariante</mat-header-cell>
+    <mat-cell *matCellDef="let birthday">
+      {{ birthday.name }}
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Nome"
+        fontIcon="{{ birthday.name | icon }}"
+      >
+      </mat-icon>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Birthday Column -->
+  <ng-container
+    matColumnDef="birthday"
+    aria-label="Campo de dia e mês do aniversário"
+  >
+    <mat-header-cell *matHeaderCellDef>Dia do aniversário</mat-header-cell>
+    <mat-cell *matCellDef="let birthday">
+      {{ birthday.birthday }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>
+      <button
+        mat-mini-fab
+        color="primary"
+        aria-label="Adicionar um aniversariante"
+        (click)="onAdd()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let birthday">
+      <button mat-icon-button aria-label="Editar aniversariante">
+        <mat-icon class="verde">edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="warn"
+        aria-label="Remover aniversariante"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>

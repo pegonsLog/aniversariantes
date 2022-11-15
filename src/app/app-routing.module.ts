@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {path: '',
-  loadChildren: () => import('./aniversariante/aniversariantes-routing.module').then(m => m.AniversariantesRoutingModule)
+  loadChildren: () => import('./birthday/birthdays.routing-module').then(m => m.BirthdaysRoutingModule)
   }
 ];
 
