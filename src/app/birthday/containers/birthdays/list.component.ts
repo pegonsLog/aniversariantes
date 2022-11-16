@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Observable, of } from 'rxjs';
 import { Birthday } from 'src/app/model/birthday';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
-import { BirthdaysService } from '../birthdays.service';
+import { BirthdaysService } from '../../birthdays.service';
 
 @Component({
   selector: 'app-birthdays',

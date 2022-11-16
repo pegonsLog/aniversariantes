@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Birthday } from 'src/app/model/birthday';
 
 @Component({
@@ -7,13 +7,11 @@ import { Birthday } from 'src/app/model/birthday';
   templateUrl: './birthdays-list.component.html',
   styleUrls: ['./birthdays-list.component.scss'],
 })
-export class BirthdaysListComponent implements OnInit {
+export class BirthdaysListComponent {
   @Input() birthdays: Birthday[] = [];
   readonly displayedColumns: string[] = ['name', 'birthday', 'actions'];
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
-
-  ngOnInit(): void {}
 
   onAdd() {
     this.router.navigate(['new'], { relativeTo: this.activatedRoute });

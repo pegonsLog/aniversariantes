@@ -1,9 +1,6 @@
-<mat-table [dataSource]="birthdays" class="mat-elevation-z8">
+<mat-table [dataSource]="birthdays">
   <!-- Name Column -->
-  <ng-container
-    matColumnDef="name"
-    aria-label="Campo de nome do funcionário"
-  >
+  <ng-container matColumnDef="name" aria-label="Campo de nome do funcionário">
     <mat-header-cell *matHeaderCellDef>Aniversariante</mat-header-cell>
     <mat-cell *matCellDef="let birthday">
       {{ birthday.name }}
@@ -21,7 +18,9 @@
     matColumnDef="birthday"
     aria-label="Campo de dia e mês do aniversário"
   >
-    <mat-header-cell *matHeaderCellDef>Dia do aniversário</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef class="day-birthday-column"
+      >Dia do aniversário</mat-header-cell
+    >
     <mat-cell *matCellDef="let birthday">
       {{ birthday.birthday }}
     </mat-cell>
@@ -29,7 +28,7 @@
 
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef>
+    <mat-header-cell *matHeaderCellDef class="add-column">
       <button
         mat-mini-fab
         color="primary"
@@ -40,15 +39,11 @@
       </button>
     </mat-header-cell>
 
-    <mat-cell *matCellDef="let birthday">
+    <mat-cell *matCellDef="let birthday" class="action-column">
       <button mat-icon-button aria-label="Editar aniversariante">
-        <mat-icon class="verde">edit</mat-icon>
+        <mat-icon class="green">edit</mat-icon>
       </button>
-      <button
-        mat-icon-button
-        color="warn"
-        aria-label="Remover aniversariante"
-      >
+      <button mat-icon-button color="warn" aria-label="Remover aniversariante">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>
