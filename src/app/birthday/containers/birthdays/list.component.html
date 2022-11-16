@@ -1,6 +1,8 @@
 <mat-card>
   <div class="column-flex mat-elevation-z8">
-    <mat-toolbar color="primary">Aniversariantes</mat-toolbar>
+    <mat-toolbar color="primary" class="montserrat"
+      >Aniversariantes</mat-toolbar
+    >
 
     <app-birthdays-list
       *ngIf="birthdays$ | async as birthdays; else loading"

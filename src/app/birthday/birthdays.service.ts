@@ -23,6 +23,7 @@ export class BirthdaysService {
   }
 
   delete(id: number){
-    return this.http.delete<Birthday>(this.API + 'birthdays').pipe(first());
+    const url = this.API + '/birthdays/' + {id};
+    return this.http.delete<Birthday>(url).pipe(first());
   }
 }

@@ -12,6 +12,7 @@ import { BirthdaysService } from '../../birthdays.service';
 })
 export class FormComponent {
   form = this.formBuilder.group({
+    id: [],
     name: [''],
     birthday: [''],
   });
@@ -29,8 +30,8 @@ export class FormComponent {
 
   onSubmit() {
     this.birthdaysService.save(this.form.value).subscribe(
-      (result) => this.onSuccess(),
-      (error) => this.onError()
+      () => this.onSuccess(),
+      () => this.onError()
     ),
       this.onClear();
   }

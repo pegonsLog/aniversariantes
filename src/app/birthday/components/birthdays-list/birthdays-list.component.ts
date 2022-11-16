@@ -16,4 +16,8 @@ export class BirthdaysListComponent {
   onAdd() {
     this.router.navigate(['new'], { relativeTo: this.activatedRoute });
   }
+
+  onDelete(id: number){
+    
+  }
 }

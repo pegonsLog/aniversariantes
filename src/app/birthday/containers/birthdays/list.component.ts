@@ -37,4 +37,8 @@ export class ListComponent {
   onAdd() {
     this.router.navigate(['new'], { relativeTo: this.activatedRoute });
   }
+
+  onDelete(id: number) {
+    this.birthdaysService.delete(id).subscribe()
+  }
 }
