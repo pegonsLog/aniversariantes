@@ -1,9 +1,11 @@
+import { Birthday } from 'src/app/model/birthday';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { BirthdaysService } from '../../birthdays.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -12,17 +14,26 @@ import { BirthdaysService } from '../../birthdays.service';
 })
 export class FormComponent {
   form = this.formBuilder.group({
-    id: [],
+    _id: [''],
     name: [''],
     birthday: [''],
   });
+
 
   constructor(
     private birthdaysService: BirthdaysService,
     private formBuilder: NonNullableFormBuilder,
     private location: Location,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private route: ActivatedRoute
+  ) {
+    // const birthday: Birthday = this.route.snapshot.data['birthday'];
+    // this.form.setValue({
+    //   _id: birthday._id,
+    //   name: birthday.name,
+    //   birthday: birthday.birthday,
+    // });
+  }
 
   onCancel() {
     this.location.back();

@@ -18,12 +18,32 @@ export class BirthdaysService {
 
     );
   }
-  save(record: Partial<Birthday>){
-    return this.http.post<Birthday>(this.API  + 'birthdays', record).pipe(first());
+
+  loadById(id: string) {
+    return this.http.get<Birthday>(`${this.API}/${id}`);
+  }
+
+  save(record: Partial<Birthday>) {
+    // console.log(record);
+    if (record._id) {
+      // console.log('update');
+      return this.update(record);
+    }
+    // console.log('create');
+    return this.create(record);
+  }
+
+  private create(record: Partial<Birthday>) {
+    return this.http.post<Birthday>(this.API, record).pipe(first());
+  }
+
+  private update(record: Partial<Birthday>) {
+    return this.http.put<Birthday>(`${this.API}/${record._id}`, record).pipe(first());
   }
 
   delete(id: number){
     const url = this.API + '/birthdays/' + {id};
     return this.http.delete<Birthday>(url).pipe(first());
   }
+
 }

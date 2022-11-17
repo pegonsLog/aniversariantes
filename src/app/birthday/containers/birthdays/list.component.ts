@@ -12,13 +12,13 @@ import { BirthdaysService } from '../../birthdays.service';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  birthdays$: Observable<Birthday[]>;
+  birthdays$: Observable<Birthday[]> | null = null;
 
   constructor(
     public dialog: MatDialog,
     private birthdaysService: BirthdaysService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private route: ActivatedRoute
   ) {
     this.birthdays$ = this.birthdaysService.list().pipe(
       catchError(() => {
@@ -35,7 +35,11 @@ export class ListComponent {
   }
 
   onAdd() {
-    this.router.navigate(['new'], { relativeTo: this.activatedRoute });
+    this.router.navigate(['new'], { relativeTo: this.route });
+  }
+
+  onEdit(edit: Birthday){
+    this.router.navigate(['edit', edit._id], { relativeTo: this.route });
   }
 
   onDelete(id: number) {

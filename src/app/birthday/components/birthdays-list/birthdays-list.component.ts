@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Birthday } from 'src/app/model/birthday';
 
@@ -9,15 +9,18 @@ import { Birthday } from 'src/app/model/birthday';
 })
 export class BirthdaysListComponent {
   @Input() birthdays: Birthday[] = [];
+  @Output() add = new EventEmitter(false);
+  @Output() edit = new EventEmitter(false);
+
   readonly displayedColumns: string[] = ['name', 'birthday', 'actions'];
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor() {}
 
   onAdd() {
-    this.router.navigate(['new'], { relativeTo: this.activatedRoute });
+    this.add.emit(true);
   }
 
-  onDelete(id: number){
-    
+  onEdit(birthday: Birthday){
+    this.edit.emit(birthday);
   }
 }

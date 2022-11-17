@@ -33,15 +33,17 @@
         mat-mini-fab
         color="primary"
         aria-label="Adicionar um aniversariante"
-        (click)="onAdd()"
       >
-        <mat-icon>add</mat-icon>
+        <mat-icon (click)="onAdd()">add</mat-icon>
       </button>
     </mat-header-cell>
 
     <mat-cell *matCellDef="let birthday" class="action-column">
-      <button mat-icon-button aria-label="Editar aniversariante">
-        <mat-icon class="green">edit</mat-icon>
+      <button
+        mat-icon-button
+        aria-label="Editar aniversariante"
+      >
+        <mat-icon class="green" (click)="onEdit(birthday)">edit</mat-icon>
       </button>
       <button mat-icon-button color="warn" aria-label="Remover aniversariante">
         <mat-icon>delete</mat-icon>
