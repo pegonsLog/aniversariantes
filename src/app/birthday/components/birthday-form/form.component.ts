@@ -1,11 +1,10 @@
-import { Birthday } from 'src/app/model/birthday';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { BirthdaysService } from '../../birthdays.service';
 import { ActivatedRoute } from '@angular/router';
+import { BirthdaysService } from '../../birthdays.service';
 
 @Component({
   selector: 'app-form',
@@ -18,7 +17,6 @@ export class FormComponent {
     name: [''],
     birthday: [''],
   });
-
 
   constructor(
     private birthdaysService: BirthdaysService,

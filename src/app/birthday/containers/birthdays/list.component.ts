@@ -38,8 +38,8 @@ export class ListComponent {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 
-  onEdit(edit: Birthday){
-    this.router.navigate(['edit', edit._id], { relativeTo: this.route });
+  onEdit(birthday: Birthday){
+    this.router.navigate(['edit', birthday._id], { relativeTo: this.route });
   }
 
   onDelete(id: number) {
