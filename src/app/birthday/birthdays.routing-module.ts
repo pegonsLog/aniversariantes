@@ -1,3 +1,4 @@
+import { BirthdayResolver } from './containers/guards/birthday.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormComponent } from './components/birthday-form/form.component';
@@ -10,11 +11,11 @@ const routes: Routes = [
   },
   {
     path: 'new',
-    component: FormComponent,
+    component: FormComponent, resolve: {birthday: BirthdayResolver}
   },
   {
     path: 'edit/:id',
-    component: FormComponent,
+    component: FormComponent, resolve: {birthday: BirthdayResolver}
   },
 ];
 

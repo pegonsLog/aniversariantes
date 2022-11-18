@@ -1,8 +1,10 @@
+import { FullscreenOverlayContainer } from '@angular/cdk/overlay';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {path: '',
+  {path: '', pathMatch: 'full', redirectTo: 'birthdays'},
+  {path: 'birthdays',
   loadChildren: () => import('./birthday/birthdays.routing-module').then(m => m.BirthdaysRoutingModule)
   }
 ];

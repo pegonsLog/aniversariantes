@@ -3,19 +3,17 @@ import { Injectable } from '@angular/core';
 import { first, Observable, tap } from 'rxjs';
 import { Birthday } from 'src/app/model/birthday';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class BirthdaysService {
-  private readonly API = 'http://localhost:3000/';
+  private readonly API = 'http://localhost:3000';
   constructor(private http: HttpClient) {}
 
   list(): Observable<Birthday[]> {
-    return this.http.get<Birthday[]>(this.API + 'birthdays').pipe(
+    return this.http.get<Birthday[]>(`${this.API}/birthdays`).pipe(
       tap((birthdays: any) => console.log(birthdays)),
-      first(),
-
+      first()
     );
   }
 
@@ -25,7 +23,7 @@ export class BirthdaysService {
 
   save(record: Partial<Birthday>) {
     // console.log(record);
-    if (record._id) {
+    if (record.id) {
       // console.log('update');
       return this.update(record);
     }
@@ -38,12 +36,13 @@ export class BirthdaysService {
   }
 
   private update(record: Partial<Birthday>) {
-    return this.http.put<Birthday>(`${this.API}/${record._id}`, record).pipe(first());
+    return this.http
+      .put<Birthday>(`${this.API}/${record.id}`, record)
+      .pipe(first());
   }
 
-  delete(id: number){
-    const url = this.API + '/birthdays/' + {id};
+  delete(id: string) {
+    const url = `${this.API}/birthdays/${id}`;
     return this.http.delete<Birthday>(url).pipe(first());
   }
-
 }

@@ -4,6 +4,7 @@ import { NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ActivatedRoute } from '@angular/router';
+import { Birthday } from 'src/app/model/birthday';
 import { BirthdaysService } from '../../birthdays.service';
 
 @Component({
@@ -25,12 +26,13 @@ export class FormComponent {
     private snackBar: MatSnackBar,
     private route: ActivatedRoute
   ) {
-    // const birthday: Birthday = this.route.snapshot.data['birthday'];
-    // this.form.setValue({
-    //   _id: birthday._id,
-    //   name: birthday.name,
-    //   birthday: birthday.birthday,
-    // });
+    const birthday: Birthday = this.route.snapshot.data['birthday'];
+    console.log(birthday);
+    this.form.setValue({
+      _id: birthday.id,
+      name: birthday.name,
+      birthday: birthday.birthday,
+    });
   }
 
   onCancel() {
