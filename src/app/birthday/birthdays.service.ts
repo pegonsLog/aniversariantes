@@ -15,16 +15,16 @@ export class BirthdaysService {
   }
 
   loadById(id: string) {
-    return this.http.get<Birthday>(`${this.API}/${id}`);
+    return this.http.get<Birthday>(`${this.API}/birthdays/${id}`);
   }
 
   save(record: Partial<Birthday>) {
-    // console.log(record);
+    // 'console.log(record)';
     if (record.id) {
-      // console.log('update');
+      // 'console.log('update')';
       return this.update(record);
     }
-    // console.log('create');
+    // 'console.log('create')';
     return this.create(record);
   }
 
@@ -34,7 +34,7 @@ export class BirthdaysService {
 
   private update(record: Partial<Birthday>) {
     return this.http
-      .put<Birthday>(`${this.API}/${record.id}`, record)
+      .put<Birthday>(this.API, record)
       .pipe(first());
   }
 

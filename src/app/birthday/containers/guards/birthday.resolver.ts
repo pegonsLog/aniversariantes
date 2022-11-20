@@ -18,9 +18,10 @@ export class BirthdayResolver implements Resolve<Birthday> {
     state: RouterStateSnapshot
   ): Observable<Birthday> {
     if (route.params && route.params['id']) {
+      console.log('Update')
       return this.birthdayService.loadById(route.params['id']);
     }
-
+    console.log('Create')
     return of({ id: '', name: '', birthday: '' });
   }
 }

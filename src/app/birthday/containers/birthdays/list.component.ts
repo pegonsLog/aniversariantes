@@ -39,7 +39,7 @@ export class ListComponent {
   }
 
   onEdit(birthday: Birthday){
-    this.router.navigate([`edit/${birthday.id}`], { relativeTo: this.route });
+    this.router.navigate(['edit', birthday.id], { relativeTo: this.route });
   }
 
   onDelete(id: string) {

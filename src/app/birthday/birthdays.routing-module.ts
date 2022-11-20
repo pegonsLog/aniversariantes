@@ -10,7 +10,7 @@ const routes: Routes = [
     component: ListComponent,
   },
   {
-    path: 'new',
+    path: 'new', 
     component: FormComponent, resolve: {birthday: BirthdayResolver}
   },
   {
