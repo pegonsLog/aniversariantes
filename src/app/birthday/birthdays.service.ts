@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { first, Observable, tap } from 'rxjs';
+import { first, Observable } from 'rxjs';
 import { Birthday } from 'src/app/model/birthday';
 
 @Injectable({
@@ -11,10 +11,7 @@ export class BirthdaysService {
   constructor(private http: HttpClient) {}
 
   list(): Observable<Birthday[]> {
-    return this.http.get<Birthday[]>(`${this.API}/birthdays`).pipe(
-      tap((birthdays: any) => console.log(birthdays)),
-      first()
-    );
+    return this.http.get<Birthday[]>(`${this.API}/birthdays`).pipe(first());
   }
 
   loadById(id: string) {
