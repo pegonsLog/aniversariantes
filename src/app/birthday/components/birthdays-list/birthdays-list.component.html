@@ -46,7 +46,7 @@
         <mat-icon class="green" (click)="onEdit(birthday)">edit</mat-icon>
       </button>
       <button mat-icon-button color="warn" aria-label="Remover aniversariante">
-        <mat-icon>delete</mat-icon>
+        <mat-icon (click)="onRemove(birthday)">delete</mat-icon>
       </button>
     </mat-cell>
   </ng-container>

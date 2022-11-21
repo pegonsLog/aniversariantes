@@ -21,7 +21,6 @@ export class BirthdaysService {
   save(record: Partial<Birthday>) {
     // 'console.log(record)';
     if (record.id) {
-      // 'console.log('update')';
       return this.update(record);
     }
     // 'console.log('create')';
@@ -33,13 +32,11 @@ export class BirthdaysService {
   }
 
   private update(record: Partial<Birthday>) {
-    return this.http
-      .put<Birthday>(this.API, record)
+    return this.http.put<Birthday>(`${this.API}/birthdays/${record.id}`, record)
       .pipe(first());
   }
 
   delete(id: string) {
-    const url = `${this.API}/birthdays/${id}`;
-    return this.http.delete<Birthday>(url).pipe(first());
+    return this.http.delete(`${this.API}/birthdays/${id}`).pipe(first());
   }
 }

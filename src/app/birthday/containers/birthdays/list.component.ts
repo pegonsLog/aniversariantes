@@ -12,7 +12,7 @@ import { BirthdaysService } from '../../birthdays.service';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  birthdays$: Observable<Birthday[]>;
+  birthdays$: Observable<Birthday[]> | null = null;
 
   constructor(
     public dialog: MatDialog,
@@ -20,6 +20,10 @@ export class ListComponent {
     private router: Router,
     private route: ActivatedRoute
   ) {
+    this.refresh();
+  }
+
+  refresh(){
     this.birthdays$ = this.birthdaysService.list().pipe(
       catchError(() => {
         this.onError('Erro ao carregar aniversariantes');
@@ -42,7 +46,7 @@ export class ListComponent {
     this.router.navigate(['edit', birthday.id], { relativeTo: this.route });
   }
 
-  onDelete(id: string) {
-    this.birthdaysService.delete(id).subscribe()
+  onRemove(birthday: Birthday) {
+    this.birthdaysService.delete(birthday.id).subscribe(() => console.log("Registro removido com sucesso"));
   }
 }
