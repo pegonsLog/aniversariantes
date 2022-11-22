@@ -15,7 +15,7 @@ export class BirthdaysService {
   }
 
   loadById(id: string) {
-    return this.http.get<Birthday>(`${this.API}/birthdays/${id}`);
+    return this.http.get<Birthday>(`${this.API}/birthdays/${id}`).pipe(first());
   }
 
   save(record: Partial<Birthday>) {
@@ -28,11 +28,14 @@ export class BirthdaysService {
   }
 
   private create(record: Partial<Birthday>) {
-    return this.http.post<Birthday>(this.API, record).pipe(first());
+    return this.http
+      .post<Birthday>(`${this.API}/birthdays/`, record)
+      .pipe(first());
   }
 
   private update(record: Partial<Birthday>) {
-    return this.http.put<Birthday>(`${this.API}/birthdays/${record.id}`, record)
+    return this.http
+      .patch<Birthday>(`${this.API}/birthdays/${record.id}`, record)
       .pipe(first());
   }
 

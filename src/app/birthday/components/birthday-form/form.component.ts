@@ -27,7 +27,6 @@ export class FormComponent {
     private route: ActivatedRoute
   ) {
     const birthday: Birthday = this.route.snapshot.data['birthday'];
-    console.log(birthday);
     this.form.setValue({
       _id: birthday.id,
       name: birthday.name,
@@ -41,10 +40,10 @@ export class FormComponent {
 
   onSubmit() {
     this.birthdaysService.save(this.form.value).subscribe(
-      () => this.onSuccess(),
-      () => this.onError()
-    ),
-      this.onClear();
+      (result) => this.onSuccess(),
+      (error) => this.onError()
+    );
+    this.onClear();
   }
 
   private onSuccess() {

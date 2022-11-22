@@ -7,7 +7,6 @@ import { Birthday } from 'src/app/model/birthday';
   styleUrls: ['./birthdays-list.component.scss'],
 })
 export class BirthdaysListComponent {
-
   @Input() birthdays: Birthday[] = [];
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
@@ -21,11 +20,11 @@ export class BirthdaysListComponent {
     this.add.emit(true);
   }
 
-  onEdit(birthday: Birthday){
+  onEdit(birthday: Birthday) {
     this.edit.emit(birthday);
   }
 
-  onRemove(birthday: Birthday){
-    this.remove.emit(birthday)
+  onRemove(birthday: Birthday) {
+    this.remove.emit(birthday);
   }
 }

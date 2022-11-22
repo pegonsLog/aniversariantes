@@ -23,7 +23,7 @@ export class ListComponent {
     this.refresh();
   }
 
-  refresh(){
+  refresh() {
     this.birthdays$ = this.birthdaysService.list().pipe(
       catchError(() => {
         this.onError('Erro ao carregar aniversariantes');
@@ -42,11 +42,15 @@ export class ListComponent {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 
-  onEdit(birthday: Birthday){
+  onEdit(birthday: Birthday) {
     this.router.navigate(['edit', birthday.id], { relativeTo: this.route });
   }
 
   onRemove(birthday: Birthday) {
-    this.birthdaysService.delete(birthday.id).subscribe(() => console.log("Registro removido com sucesso"));
+    this.birthdaysService.delete(birthday.id).subscribe(() => {
+      console.log("Registro removido com sucesso"),
+      this.refresh()
+    }
+    );
   }
 }
