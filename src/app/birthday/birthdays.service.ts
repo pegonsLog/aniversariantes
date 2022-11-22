@@ -19,23 +19,21 @@ export class BirthdaysService {
   }
 
   save(record: Partial<Birthday>) {
-    // 'console.log(record)';
     if (record.id) {
       return this.update(record);
     }
-    // 'console.log('create')';
     return this.create(record);
   }
 
   private create(record: Partial<Birthday>) {
     return this.http
-      .post<Birthday>(`${this.API}/birthdays/`, record)
+      .post<Birthday>(`${this.API}/birthdays`, record)
       .pipe(first());
   }
 
   private update(record: Partial<Birthday>) {
     return this.http
-      .patch<Birthday>(`${this.API}/birthdays/${record.id}`, record)
+      .put<Birthday>(`${this.API}/birthdays/${record.id}`, record)
       .pipe(first());
   }
 

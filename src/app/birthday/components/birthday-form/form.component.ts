@@ -39,10 +39,9 @@ export class FormComponent {
   }
 
   onSubmit() {
-    this.birthdaysService.save(this.form.value).subscribe(
-      (result) => this.onSuccess(),
-      (error) => this.onError()
-    );
+    this.birthdaysService.save(this.form.value)
+    .subscribe(
+      () => this.onSuccess(), () => this.onError());
     this.onClear();
   }
 
