@@ -14,7 +14,7 @@ import { BirthdaysService } from '../../birthdays.service';
 })
 export class FormComponent {
   form = this.formBuilder.group({
-    _id: [''],
+    id: [''],
     name: [''],
     birthday: [''],
   });
@@ -28,7 +28,7 @@ export class FormComponent {
   ) {
     const birthday: Birthday = this.route.snapshot.data['birthday'];
     this.form.setValue({
-      _id: birthday.id,
+      id: birthday.id,
       name: birthday.name,
       birthday: birthday.birthday,
     });
@@ -39,9 +39,10 @@ export class FormComponent {
   }
 
   onSubmit() {
-    this.birthdaysService.save(this.form.value)
-    .subscribe(
-      () => this.onSuccess(), () => this.onError());
+    this.birthdaysService.save(this.form.value).subscribe(
+      () => this.onSuccess(),
+      () => this.onError()
+    );
     this.onClear();
   }
 

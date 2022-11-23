@@ -33,7 +33,7 @@ export class BirthdaysService {
 
   private update(record: Partial<Birthday>) {
     return this.http
-      .put<Birthday>(`${this.API}/birthdays/${record.id}`, record)
+      .patch<Birthday>(`${this.API}/birthdays/${record.id}`, record)
       .pipe(first());
   }
 

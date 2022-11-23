@@ -48,7 +48,8 @@ export class ListComponent {
 
   onRemove(birthday: Birthday) {
     this.birthdaysService.delete(birthday.id).subscribe(() => {
-      console.log('Registro removido com sucesso'), this.refresh();
+      console.log('Registro removido com sucesso')
+      this.refresh();
     });
   }
 }
