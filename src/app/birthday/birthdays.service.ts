@@ -14,21 +14,24 @@ export class BirthdaysService {
     return this.http.get<Birthday[]>(`${this.API}/birthdays`).pipe(first());
   }
 
-  loadById(id: string) {
+  loadById(id: number) {
     return this.http.get<Birthday>(`${this.API}/birthdays/${id}`).pipe(first());
   }
 
   save(record: Partial<Birthday>) {
     if (record.id) {
+      console.log('update');
+      console.log(record.id);
       return this.update(record);
     }
+    console.log('create');
+    console.log(record.id);
     return this.create(record);
   }
 
   private create(record: Partial<Birthday>) {
-    return this.http
-      .post<Birthday>(`${this.API}/birthdays`, record)
-      .pipe(first());
+    const birthday = { name: record.name, birthday: record.birthday };
+    return this.http.post<Birthday>(`${this.API}/birthdays`, birthday);
   }
 
   private update(record: Partial<Birthday>) {
@@ -37,7 +40,7 @@ export class BirthdaysService {
       .pipe(first());
   }
 
-  delete(id: string) {
+  delete(id: number) {
     return this.http.delete(`${this.API}/birthdays/${id}`).pipe(first());
   }
 }

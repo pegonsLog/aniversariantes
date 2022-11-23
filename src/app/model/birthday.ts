@@ -1,5 +1,5 @@
 export interface Birthday {
-  id: string;
+  id: number;
   name: string;
   birthday: string;
 }

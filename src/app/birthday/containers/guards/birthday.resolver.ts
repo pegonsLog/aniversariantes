@@ -20,6 +20,6 @@ export class BirthdayResolver implements Resolve<Birthday> {
     if (route.params && route.params['id']) {
       return this.birthdayService.loadById(route.params['id']);
     }
-    return of({ id: '', name: '', birthday: '' });
+    return of({ id: 0, name: '', birthday: '' });
   }
 }
