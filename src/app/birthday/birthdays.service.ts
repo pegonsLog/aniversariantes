@@ -40,7 +40,7 @@ export class BirthdaysService {
       .pipe(first());
   }
 
-  delete(id: number) {
+  remove(id: number) {
     return this.http.delete(`${this.API}/birthdays/${id}`).pipe(first());
   }
 }

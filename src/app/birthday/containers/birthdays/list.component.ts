@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Observable, of } from 'rxjs';
 import { Birthday } from 'src/app/model/birthday';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { BirthdaysService } from '../../birthdays.service';
+
 
 @Component({
   selector: 'app-birthdays',
@@ -18,7 +20,8 @@ export class ListComponent {
     public dialog: MatDialog,
     private birthdaysService: BirthdaysService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
   ) {
     this.refresh();
   }
@@ -47,8 +50,8 @@ export class ListComponent {
   }
 
   onRemove(birthday: Birthday) {
-    this.birthdaysService.delete(birthday.id).subscribe(() => {
-      console.log('Registro removido com sucesso')
+    this.birthdaysService.remove(birthday.id).subscribe(() => {
+      this.snackBar.open('Registro removido com sucesso!', '', { duration: 3000 });
       this.refresh();
     });
   }

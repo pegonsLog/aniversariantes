@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Birthday } from 'src/app/model/birthday';
 import { BirthdaysService } from '../../birthdays.service';
 
@@ -13,6 +13,7 @@ import { BirthdaysService } from '../../birthdays.service';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent {
+
   form = this.formBuilder.group({
     id: [0],
     name: [''],
@@ -22,9 +23,9 @@ export class FormComponent {
   constructor(
     private birthdaysService: BirthdaysService,
     private formBuilder: NonNullableFormBuilder,
-    private location: Location,
     private snackBar: MatSnackBar,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
     const birthday: Birthday = this.route.snapshot.data['birthday'];
     this.form.setValue({
@@ -34,8 +35,8 @@ export class FormComponent {
     });
   }
 
-  onCancel() {
-    this.location.back();
+  async refreshOrCancel() {
+   await this.router.navigate([''], { relativeTo: this.route });
   }
 
   onSubmit() {
@@ -44,12 +45,12 @@ export class FormComponent {
       () => this.onSuccess(),
       () => this.onError()
     );
-    this.onClear();
+    this.refreshOrCancel()
   }
 
   private onSuccess() {
     this.snackBar.open('Registro inserido com sucesso!', '', {
-      duration: 3000,
+      duration: 1000
     });
   }
 
