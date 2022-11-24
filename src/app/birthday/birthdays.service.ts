@@ -30,7 +30,7 @@ export class BirthdaysService {
   }
 
   private create(record: Partial<Birthday>) {
-    const birthday = { name: record.name, birthday: record.birthday };
+    const birthday = { name: record.name, day: record.day, month: record.month };
     return this.http.post<Birthday>(`${this.API}/birthdays`, birthday);
   }
 

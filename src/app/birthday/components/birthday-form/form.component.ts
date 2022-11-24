@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Birthday } from 'src/app/model/birthday';
 import { BirthdaysService } from '../../birthdays.service';
 
@@ -17,7 +17,8 @@ export class FormComponent {
   form = this.formBuilder.group({
     id: [0],
     name: [''],
-    birthday: [''],
+    day: [''],
+    month:['']
   });
 
   constructor(
@@ -25,18 +26,19 @@ export class FormComponent {
     private formBuilder: NonNullableFormBuilder,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
-    private router: Router,
+    private location: Location
   ) {
     const birthday: Birthday = this.route.snapshot.data['birthday'];
     this.form.setValue({
       id: birthday.id,
       name: birthday.name,
-      birthday: birthday.birthday,
+      day: birthday.day,
+      month: birthday.month,
     });
   }
 
   async refreshOrCancel() {
-   await this.router.navigate([''], { relativeTo: this.route });
+    this.location.back();
   }
 
   onSubmit() {

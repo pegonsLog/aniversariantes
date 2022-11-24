@@ -51,7 +51,10 @@ export class ListComponent {
 
   onRemove(birthday: Birthday) {
     this.birthdaysService.remove(birthday.id).subscribe(() => {
-      this.snackBar.open('Registro removido com sucesso!', '', { duration: 3000 });
+      this.snackBar.open('Registro removido com sucesso!', 'X', { duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center'
+       });
       this.refresh();
     });
   }
