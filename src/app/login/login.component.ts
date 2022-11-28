@@ -3,6 +3,7 @@ import { NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Login } from '../model/login';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -18,16 +19,15 @@ export class LoginComponent {
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private snackBar: MatSnackBar,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loginService: LoginService,
   ) {
-    const login: Login = this.route.snapshot.data['login'];
-    this.form.setValue({
-      user: login.user,
-      password: login.password,
-    });
+
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.loginService.getUsers(this.form.value.password, this.form.value.user)
+  }
 
   clear() {}
 }

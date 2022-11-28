@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from '../shared/angular-material/angular-material.module';
 import { SharedModule } from '../shared/shared.module';
+import { BirthdaysRoutingModule } from './birthdays.routing-module';
 import { FormComponent } from './components/birthday-form/form.component';
 
 import { BirthdaysListComponent } from './components/birthdays-list/birthdays-list.component';
@@ -15,6 +16,7 @@ import { ListComponent } from './containers/birthdays/list.component';
     AngularMaterialModule,
     SharedModule,
     ReactiveFormsModule,
+    BirthdaysRoutingModule
   ],
   exports: [ListComponent, FormComponent, BirthdaysListComponent],
 })

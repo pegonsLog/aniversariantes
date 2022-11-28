@@ -6,7 +6,7 @@ import { ListComponent } from './containers/birthdays/list.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'birthdays',
     component: ListComponent,
   },
   {
