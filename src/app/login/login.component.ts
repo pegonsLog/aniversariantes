@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { NonNullableFormBuilder } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
-import { Login } from '../model/login';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,24 +9,29 @@ import { Login } from '../model/login';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  form = this.formBuilder.group({
-    user: [''],
-    password: [''],
-  });
+
+  form: FormGroup;
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private snackBar: MatSnackBar,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
-    const login: Login = this.route.snapshot.data['login'];
-    this.form.setValue({
-      user: login.user,
-      password: login.password,
+    this.form = this.formBuilder.group({
+      user: [''],
+      password: [''],
     });
+    // const login: Login = this.route.snapshot.data['login'];
+    // this.form.setValue({
+    //   user: login.user,
+    //   password: login.password,
+    // });
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.router.navigate(['birthdays'])
+  }
 
   clear() {}
 }
