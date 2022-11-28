@@ -4,9 +4,14 @@ import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  {
+    {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'birthdays',
+    loadChildren: () =>
+      import('./birthday/birthdays.module').then((m) => m.BirthdaysModule),
   },
   {
     path: 'birthdays',
