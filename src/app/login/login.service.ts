@@ -1,25 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { first } from 'rxjs';
 import { Login } from '../model/login';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  private users: Login[] = [
-    {
-      user: 'pegons',
-      password: '123',
-    },
-  ];
+  private readonly API = 'http://localhost:3000';
+  constructor(private http: HttpClient) {}
 
-  constructor() {}
-
-  getUsers(user: string, password: string) {
-    for (let u of this.users) {
-      if (u.user == user && u.password == password) {
-        return u;
-      }
-      return null;
-    }
+   getUsers(user: Login) {
+   return this.http.get<Login>(`${this.API}/users/${user.id}`).pipe(first());
   }
 }

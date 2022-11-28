@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-<<<<<<< HEAD
-import { ActivatedRoute, Router } from '@angular/router';
-=======
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import { Login } from '../model/login';
 import { LoginService } from './login.service';
->>>>>>> f79391e8f71804853862af8f066d6c39b66adbdb
 
 @Component({
   selector: 'app-login',
@@ -15,39 +12,41 @@ import { LoginService } from './login.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-
   form: FormGroup;
+  subscription: Subscription = new Subscription();
+  user: Observable<Login>;
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private snackBar: MatSnackBar,
-    private route: ActivatedRoute,
-<<<<<<< HEAD
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) {
     this.form = this.formBuilder.group({
       user: [''],
       password: [''],
     });
-    // const login: Login = this.route.snapshot.data['login'];
-    // this.form.setValue({
-    //   user: login.user,
-    //   password: login.password,
-    // });
   }
 
   onSubmit() {
-    this.router.navigate(['birthdays'])
-=======
-    private loginService: LoginService,
-  ) {
-
+    this.subscription = this.loginService.getUsers(this.form.value).subscribe();
+    if (this.user) {
+      this.router.navigate(['birthdays']);
+      this.unsubscribe();
+    } else {
+      this.snackBar.open('Usuário ou senha inválidos!', 'X', {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+      });
+    }
   }
 
-  onSubmit() {
-    this.loginService.getUsers(this.form.value.password, this.form.value.user)
->>>>>>> f79391e8f71804853862af8f066d6c39b66adbdb
+  clear() {
+    this.form.setValue({ user: '', password: '' });
   }
 
-  clear() {}
+  unsubscribe() {
+    this.subscription.unsubscribe();
+  }
 }
