@@ -7,7 +7,7 @@ import { Birthday } from 'src/app/model/birthday';
   styleUrls: ['./birthdays-list.component.scss'],
 })
 export class BirthdaysListComponent {
-  @Input() birthdays: Birthday[] = [];
+  @Input() birthdays: any;
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
   @Output() remove = new EventEmitter(false);

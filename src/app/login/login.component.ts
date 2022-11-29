@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { Login } from '../model/login';
 import { LoginService } from './login.service';
 
 @Component({
@@ -13,8 +11,6 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent {
   form: FormGroup;
-  subscription: Subscription = new Subscription();
-  user: Observable<Login>;
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
@@ -29,10 +25,9 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.subscription = this.loginService.getUsers(this.form.value).subscribe();
-    if (this.user) {
+    this.loginService.userAuth(this.form.value);
+    if (this.loginService.auth) {
       this.router.navigate(['birthdays']);
-      this.unsubscribe();
     } else {
       this.snackBar.open('Usuário ou senha inválidos!', 'X', {
         duration: 3000,
@@ -44,9 +39,5 @@ export class LoginComponent {
 
   clear() {
     this.form.setValue({ user: '', password: '' });
-  }
-
-  unsubscribe() {
-    this.subscription.unsubscribe();
   }
 }
