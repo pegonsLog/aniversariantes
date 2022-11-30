@@ -63,8 +63,10 @@ export class ListComponent {
       });
   }
 
-  listForMonth(){
-    this.birthdaysService.listForMonth(this.month).pipe(first()).subscribe((list: any) => this.listMonth = list);
+  listForMonth() {
+    this.birthdaysService
+      .listForMonth(this.month)
+      .pipe(first())
+      .subscribe((list: any) => (this.listMonth = list));
   }
-
 }
