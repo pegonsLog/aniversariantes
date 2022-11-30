@@ -14,24 +14,24 @@ export class BirthdaysService {
     return this.http.get<Birthday[]>(`${this.API}/birthdays`).pipe(first());
   }
 
+  listForMonth(month: string): Observable<Birthday[]> {
+    return this.http.get<Birthday[]>(`${this.API}/birthdays/${month}`);
+  }
+
   loadById(id: number) {
     return this.http.get<Birthday>(`${this.API}/birthdays/${id}`).pipe(first());
   }
 
   save(record: Partial<Birthday>) {
     if (record.id) {
-      console.log('update');
-      console.log(record.id);
       return this.update(record);
     }
-    console.log('create');
-    console.log(record.id);
     return this.create(record);
   }
 
   private create(record: Partial<Birthday>) {
     const birthday = { name: record.name, day: record.day, month: record.month };
-    return this.http.post<Birthday>(`${this.API}/birthdays`, birthday);
+    return this.http.post<Birthday>(`${this.API}/birthdays`, birthday).pipe(first());
   }
 
   private update(record: Partial<Birthday>) {

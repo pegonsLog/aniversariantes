@@ -1,3 +1,18 @@
+<mat-grid-list cols="12" rowHeight="3:1">
+  <mat-grid-tile><a>Jan</a></mat-grid-tile>
+  <mat-grid-tile><a>Fev</a></mat-grid-tile>
+  <mat-grid-tile><a>Mar</a></mat-grid-tile>
+  <mat-grid-tile><a>Abr</a></mat-grid-tile>
+  <mat-grid-tile><a>Mai</a></mat-grid-tile>
+  <mat-grid-tile><a>Jun</a></mat-grid-tile>
+  <mat-grid-tile><a>Jul</a></mat-grid-tile>
+  <mat-grid-tile><a>Ago</a></mat-grid-tile>
+  <mat-grid-tile><a>Set</a></mat-grid-tile>
+  <mat-grid-tile><a>Out</a></mat-grid-tile>
+  <mat-grid-tile><a>Nov</a></mat-grid-tile>
+  <mat-grid-tile><a>Dez</a></mat-grid-tile>
+</mat-grid-list>
+
 <mat-card>
   <div class="column-flex mat-elevation-z8">
     <mat-toolbar color="primary" class="montserrat"
@@ -7,10 +22,10 @@
     <app-birthdays-list
       *ngIf="birthdays$ | async as birthdays; else loading"
       [birthdays]="birthdays"
+      [month]="month"
       (add)="onAdd()"
       (edit)="onEdit($event)"
       (remove)="onRemove($event)"
-      (birthdayList)="refresh()"
     ></app-birthdays-list>
 
     <ng-template #loading>

@@ -37,7 +37,7 @@ export class FormComponent {
     });
   }
 
-  async refreshOrCancel() {
+  async onCancel() {
     this.location.back();
   }
 
@@ -47,7 +47,7 @@ export class FormComponent {
       () => this.onSuccess(),
       () => this.onError()
     );
-    this.refreshOrCancel()
+    this.onClear()
   }
 
   private onSuccess() {

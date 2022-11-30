@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { first, Subscription } from 'rxjs';
 import { User } from './user';
 
 @Injectable({
@@ -7,9 +8,27 @@ import { User } from './user';
 })
 export class LoginService {
   private readonly API = 'http://localhost:3000';
-  constructor(private http: HttpClient) {}
+  users: User[] = [];
+  auth: boolean = false;
+
+  constructor(private http: HttpClient) {
+    this.getAll();
+  }
 
   getAll() {
-    return this.http.get<User[]>(`${this.API}/users`);
+    this.http.get<User[]>(`${this.API}/users`).pipe(first()).subscribe((user: User[]) => {
+      this.users = user;
+    });
+  }
+
+  userAuth(user: Partial<User>): boolean {
+
+
+    for (let u of this.users) {
+      if (user.user == u.user && user.password == u.password) {
+        return (this.auth = true);
+      }
+    }
+    return (this.auth = false);
   }
 }

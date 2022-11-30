@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Birthday } from 'src/app/model/birthday';
 
 @Component({
@@ -6,8 +6,9 @@ import { Birthday } from 'src/app/model/birthday';
   templateUrl: './birthdays-list.component.html',
   styleUrls: ['./birthdays-list.component.scss'],
 })
-export class BirthdaysListComponent {
+export class BirthdaysListComponent{
   @Input() birthdays: any;
+  @Input() month: string = "";
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
   @Output() remove = new EventEmitter(false);
