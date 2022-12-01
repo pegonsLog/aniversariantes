@@ -8,7 +8,6 @@ import { Birthday } from 'src/app/model/birthday';
 })
 export class BirthdaysListComponent{
   @Input() birthdays: any;
-  @Input() month: string = "";
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
   @Output() remove = new EventEmitter(false);

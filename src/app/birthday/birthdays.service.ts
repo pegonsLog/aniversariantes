@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { first, Observable } from 'rxjs';
+import { filter, first, Observable } from 'rxjs';
 import { Birthday } from 'src/app/model/birthday';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class BirthdaysService {
   }
 
   listForMonth(month: string): Observable<Birthday[]> {
-    return this.http.get<Birthday[]>(`${this.API}/birthdays/${month}`);
+    return this.http.get<Birthday[]>(`${this.API}/birthdays/month/${month}`).pipe(first());
   }
 
   loadById(id: number) {

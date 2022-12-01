@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { ThisReceiver } from '@angular/compiler';
+import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, first, Observable, of } from 'rxjs';
+import { catchError, first, Observable, of, Subscription } from 'rxjs';
 import { Birthday } from 'src/app/model/birthday';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { BirthdaysService } from '../../birthdays.service';
@@ -12,10 +13,25 @@ import { BirthdaysService } from '../../birthdays.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent {
+export class ListComponent implements OnDestroy {
   birthdays$: Observable<Birthday[]> | null = null;
-  listMonth: Observable<Birthday[]> | null = null;
+  subscription: Subscription = new Subscription();
+  months: string[] = [
+    'Jan',
+    'Fev',
+    'Mar',
+    'Abr',
+    'Mai',
+    'Jun',
+    'Jul',
+    'Ago',
+    'Set',
+    'Out',
+    'Nov',
+    'Dez',
+  ];
   month: string = '';
+  headerMonth: string = '';
   constructor(
     public dialog: MatDialog,
     private birthdaysService: BirthdaysService,
@@ -63,10 +79,10 @@ export class ListComponent {
       });
   }
 
-  listForMonth() {
-    this.birthdaysService
-      .listForMonth(this.month)
-      .pipe(first())
-      .subscribe((list: any) => (this.listMonth = list));
+  listForMonth(monthMenu: string) {
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
