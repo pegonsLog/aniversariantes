@@ -18,14 +18,24 @@ mat-card {
   padding: 30px;
 }
 
-.montserrat{
-  font-family: Montserrat;
-}
-
 mat-grid-tile {
   background: lightblue;
 }
 .toolbar-month{
   padding-top: 10px;
   padding-bottom: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+span {
+  font-family: Montserrat, Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title-size {
+  font-size: x-large;
 }
