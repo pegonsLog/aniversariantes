@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Birthday } from 'src/app/model/birthday';
-import { BirthdaysService } from '../../birthdays.service';
+import { BirthdaysService } from '../components.service';
 
 @Injectable({
   providedIn: 'root',

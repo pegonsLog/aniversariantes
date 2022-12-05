@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ActivatedRoute } from '@angular/router';
 import { Birthday } from 'src/app/model/birthday';
-import { BirthdaysService } from '../../birthdays.service';
+import { BirthdaysService } from '../components.service';
 
 @Component({
   selector: 'app-form',

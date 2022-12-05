@@ -1,13 +1,14 @@
-import { BirthdayResolver } from './containers/guards/birthday.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormComponent } from './components/birthday-form/form.component';
-import { ListComponent } from './containers/birthdays/list.component';
+import { FormComponent } from './birthday-form/form.component';
+import { BirthdaysListComponent } from './birthdays-list/birthdays-list.component';
+import { BirthdayResolver } from './guards/birthday.resolver';
+
 
 const routes: Routes = [
   {
-    path: 'birthdays',
-    component: ListComponent,
+    path: 'components',
+    component: BirthdaysListComponent,
   },
   {
     path: 'new',
@@ -23,4 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class BirthdaysRoutingModule {}
+export class ComponentsRoutingModule {}

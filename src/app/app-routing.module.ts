@@ -5,13 +5,6 @@ import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  {
-    path: 'birthdays',
-    loadChildren: () =>
-      import('src/app/birthday/birthdays.module').then(
-        (m) => m.BirthdaysModule
-      ),
-  },
 ];
 
 @NgModule({
