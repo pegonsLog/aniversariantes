@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormComponent } from './birthday-form/form.component';
-import { BirthdaysListComponent } from './birthdays-list/birthdays-list.component';
+import { ListComponent } from './birthdays/list.component';
 import { BirthdayResolver } from './guards/birthday.resolver';
+import { HeaderMonthsComponent } from './header-months/header-months.component';
 
 
 const routes: Routes = [
+
   {
-    path: 'components',
-    component: BirthdaysListComponent,
+    path: 'headermonths',
+    component: HeaderMonthsComponent,
   },
   {
     path: 'new',

@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,8 +15,8 @@ import { BirthdaysService } from '../components.service';
 export class ListComponent implements OnDestroy {
   birthdays$: Observable<Birthday[]> | null = null;
   subscription: Subscription = new Subscription();
+  @Input() monthMenu: any;
 
-  month: string = '';
   constructor(
     public dialog: MatDialog,
     private birthdaysService: BirthdaysService,
@@ -24,16 +24,16 @@ export class ListComponent implements OnDestroy {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar
   ) {
-    this.refresh();
   }
 
   refresh() {
-    this.birthdays$ = this.birthdaysService.list().pipe(
+    console.log(this.monthMenu)
+    this.subscription = this.birthdaysService.list(this.monthMenu).pipe(
       catchError(() => {
         this.onError('Erro ao carregar aniversariantes');
         return of([]);
       })
-    );
+    ).subscribe((list: any) => this.birthdays$ = list);
   }
 
   onError(errorMsg: string) {
@@ -62,6 +62,10 @@ export class ListComponent implements OnDestroy {
         });
         this.refresh();
       });
+  }
+
+  searchMonth(month: any) {
+    this.monthMenu = month;
   }
 
   ngOnDestroy() {

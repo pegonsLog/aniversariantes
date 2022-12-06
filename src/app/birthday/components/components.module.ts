@@ -7,11 +7,12 @@ import { ListComponent } from './birthdays/list.component';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { HeaderMonthsComponent } from './header-months/header-months.component';
 
 
 
 @NgModule({
-  declarations: [ListComponent, FormComponent, BirthdaysListComponent],
+  declarations: [ListComponent, FormComponent, BirthdaysListComponent, HeaderMonthsComponent],
   imports: [
     CommonModule,
     ComponentsRoutingModule,
@@ -20,6 +21,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule
 
   ],
-  exports: [ListComponent, FormComponent, BirthdaysListComponent]
+  exports: [ListComponent, FormComponent, BirthdaysListComponent, HeaderMonthsComponent]
 })
 export class ComponentsModule { }

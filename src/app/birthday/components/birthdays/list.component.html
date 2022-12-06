@@ -1,14 +1,7 @@
-<p>
-  <mat-toolbar color="primary" class="title-size">
-    <span><a routerLink="">GARBO</a></span>
-  </mat-toolbar>
-</p>
-
-<mat-card class="mat-elevation-z8">
-  <mat-toolbar color="primary" class="montserrat">Aniversariantes</mat-toolbar>
   <app-birthdays-list
     *ngIf="birthdays$ | async as birthdays; else loading"
     [birthdays]="birthdays"
+    (monthMenu)="searchMonth($event)"
     (add)="onAdd()"
     (edit)="onEdit($event)"
     (remove)="onRemove($event)"
@@ -19,4 +12,3 @@
       <mat-spinner></mat-spinner>
     </div>
   </ng-template>
-</mat-card>

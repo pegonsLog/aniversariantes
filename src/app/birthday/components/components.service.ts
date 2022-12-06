@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { filter, first, Observable } from 'rxjs';
+import { first, Observable } from 'rxjs';
 import { Birthday } from 'src/app/model/birthday';
 
 @Injectable({
@@ -10,8 +10,8 @@ export class BirthdaysService {
   private readonly API = 'http://localhost:3000';
   constructor(private http: HttpClient) {}
 
-  list(): Observable<Birthday[]> {
-    return this.http.get<Birthday[]>(`${this.API}/birthdays`).pipe(first());
+  list(month: string): Observable<Birthday[]> {
+    return this.http.get<Birthday[]>(`${this.API}/birthdays/month/${month}`).pipe(first());
   }
 
   listForMonth(month: string): Observable<Birthday[]> {
