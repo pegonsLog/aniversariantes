@@ -24,7 +24,6 @@ export class ListComponent implements OnDestroy {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar
   ) {
-    this.refresh();
   }
 
   refresh() {
