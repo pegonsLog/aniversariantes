@@ -15,7 +15,7 @@ export class BirthdaysService {
   }
 
   listForMonth(month: string): Observable<Birthday[]> {
-    return this.http.get<Birthday[]>(`${this.API}/birthdays/month/${month}`).pipe(first());
+    return this.http.get<Birthday[]>(`${this.API}/birthdays/${month}`).pipe(first());
   }
 
   loadById(id: number) {

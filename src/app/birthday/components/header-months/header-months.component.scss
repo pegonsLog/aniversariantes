@@ -25,3 +25,11 @@ span {
 .title-size {
   font-size: x-large;
 }
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.15);
+  padding: 30px;
+}
