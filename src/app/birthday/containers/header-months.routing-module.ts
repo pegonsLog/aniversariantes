@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HeaderMonthsComponent } from './containers/header-months.component';
+import { FormComponent } from '../components/birthday-form/form.component';
+import { BirthdayResolver } from './guards/birthday.resolver';
+import { HeaderMonthsComponent } from './header-months/header-months.component';
 
 const routes: Routes = [
   {
@@ -14,14 +16,14 @@ const routes: Routes = [
         (m) => m.ComponentsModule
       ),
   },
-  // {
-  //   path: 'new',
-  //   component: FormComponent, resolve: {birthday: BirthdayResolver}
-  // },
-  // {
-  //   path: 'edit/:id',
-  //   component: FormComponent, resolve: {birthday: BirthdayResolver}
-  // },
+  {
+    path: 'new',
+    component: FormComponent, resolve: {birthday: BirthdayResolver}
+  },
+  {
+    path: 'edit/:id',
+    component: FormComponent, resolve: {birthday: BirthdayResolver}
+  },
 ];
 
 @NgModule({

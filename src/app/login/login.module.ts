@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ComponentsModule } from '../birthday/components/components.module';
 import { AngularMaterialModule } from '../shared/angular-material/angular-material.module';
 import { LoginComponent } from './login.component';
+import { HeaderMonthModule } from '../birthday/containers/header-months.module';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -13,7 +13,7 @@ import { LoginComponent } from './login.component';
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
-    ComponentsModule
+    HeaderMonthModule
   ],
   exports: [LoginComponent],
 })
