@@ -7,13 +7,12 @@
 <mat-card class="mat-elevation-z8">
   <mat-toolbar color="primary" class="montserrat">Aniversariantes</mat-toolbar>
   <div class="toolbar-month">
-    <mat-grid-list cols="12" rowHeight="3:1">
-      <mat-grid-tile>
-        <a [routerLink]="['components/print', 1]">
-          {{ "Jan" }}
-        </a>
-      </mat-grid-tile>
-      <mat-grid-tile>
+    <mat-grid-list cols="12" rowHeight="5:2">
+      <a *ngFor="let month of months" [routerLink]="['/components/print', month.name]">
+        <mat-grid-tile> {{ month.name }}</mat-grid-tile>
+      </a>
+
+      <!-- <mat-grid-tile>
         <button mat-button (click)="changeMonth('Fev')">
           {{ "Fev" }}
         </button>
@@ -67,7 +66,7 @@
         <button mat-button (click)="changeMonth('Dez')">
           {{ "Dez" }}
         </button>
-      </mat-grid-tile>
+      </mat-grid-tile> -->
     </mat-grid-list>
   </div>
   <!-- <fragment-list
@@ -81,7 +80,7 @@
   </ng-template>
 </mat-card> -->
 
-<!--
+  <!--
 <app-birthdays-list
 *ngIf="birthdays$ | async as birthdays; else loading"
 [birthdays]="birthdays"
@@ -95,3 +94,4 @@
   <mat-spinner></mat-spinner>
 </div>
 </ng-template> -->
+</mat-card>

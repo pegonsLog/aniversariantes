@@ -8,7 +8,27 @@ import { first, Observable } from 'rxjs';
 })
 export class HeaderMonthsService {
   private readonly API = 'http://localhost:3000';
+
+  private months = [
+    { name: 'Jan' },
+    { name: 'Fev' },
+    { name: 'Mar' },
+    { name: 'Abr' },
+    { name: 'Mai' },
+    { name: 'Jun' },
+    { name: 'Jul' },
+    { name: 'Ago' },
+    { name: 'Set' },
+    { name: 'Out' },
+    { name: 'Nov' },
+    { name: 'Dez' },
+  ];
+
   constructor(private http: HttpClient) {}
+
+  getMonths() {
+    return this.months;
+  }
 
   listAll(): Observable<Birthday[]> {
     return this.http.get<Birthday[]>(`${this.API}/birthdays`).pipe(first());

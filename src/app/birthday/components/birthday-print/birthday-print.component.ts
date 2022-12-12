@@ -1,6 +1,6 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, Output, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { catchError, of } from 'rxjs';
+import { catchError, of, Subscription} from 'rxjs';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { ComponentService } from '../components.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './birthday-print.component.html',
   styleUrls: ['./birthday-print.component.scss'],
 })
-export class BirthdayPrintComponent {
+export class BirthdayPrintComponent implements OnInit {
   @Output() birthdays$: any;
   month: string = "";
 
@@ -19,7 +19,7 @@ export class BirthdayPrintComponent {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     ) {
-      console.log(this.route)
+      this.print();
     }
 
   print() {
@@ -37,5 +37,8 @@ export class BirthdayPrintComponent {
     this.dialog.open(ErrorDialogComponent, {
       data: errorMsg,
     });
+  }
+
+  ngOnInit(){
   }
 }

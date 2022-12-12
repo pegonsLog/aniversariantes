@@ -1,4 +1,10 @@
-import { Component, OnDestroy, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  Output,
+  EventEmitter,
+  OnInit,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,6 +21,7 @@ import { HeaderMonthsService } from '../../header-months.service';
 export class HeaderMonthsComponent implements OnDestroy {
   birthdays$: Observable<Birthday[]> | null = null;
   prints$: Observable<Birthday[]> | null = null;
+  months: any = [];
 
   @Output() print: EventEmitter<string> = new EventEmitter(false);
 
@@ -28,16 +35,16 @@ export class HeaderMonthsComponent implements OnDestroy {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar
   ) {
-    this.refresh();
+    this.loadMonth();
   }
 
-  birthdaysEmitter(){
-    this.birthdays.emit(this.birthdays$);
+  loadMonth() {
+    this.months = this.headerMonthService.getMonths();
   }
 
   changeMonth(monthMenu: string) {
     this.print.emit(monthMenu);
-    this.router.navigate(['components/print'])
+    this.router.navigate(['components/print']);
   }
 
   refresh() {
@@ -48,7 +55,6 @@ export class HeaderMonthsComponent implements OnDestroy {
       })
     );
   }
-
 
   onError(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {

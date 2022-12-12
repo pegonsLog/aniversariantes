@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListComponent } from '../components/birthdays-list/birthday-list.component';
 import { HeaderMonthsComponent } from './header-months/header/header-months.component';
 
 const routes: Routes = [
@@ -8,6 +7,7 @@ const routes: Routes = [
     path: 'header',
     component: HeaderMonthsComponent,
   },
+
   {
     path: 'components',
     loadChildren: () =>
