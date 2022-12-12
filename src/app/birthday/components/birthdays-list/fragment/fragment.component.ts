@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Birthday } from 'src/app/model/birthday';
+import { Birthday } from 'api-birthdays/dist/birthdays/entities/birthday.entity';
 
 @Component({
-  selector: 'app-birthdays-list',
-  templateUrl: './birthdays-list.component.html',
-  styleUrls: ['./birthdays-list.component.scss'],
+  selector: 'fragment-list',
+  templateUrl: './fragment.component.html',
+  styleUrls: ['./fragment.component.scss'],
 })
-export class BirthdaysListComponent{
+export class FragmentComponent {
   @Input() birthdays: any;
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);

@@ -1,19 +1,38 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Birthday } from 'src/app/model/birthday';
+import { Component, Input, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router, ActivatedRoute } from '@angular/router';
+import { catchError, of } from 'rxjs';
+import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
+import { ComponentService } from '../components.service';
 
 @Component({
   selector: 'app-birthday-print',
   templateUrl: './birthday-print.component.html',
-  styleUrls: ['./birthday-print.component.scss']
+  styleUrls: ['./birthday-print.component.scss'],
 })
-export class BirthdayPrintComponent implements OnInit {
+export class BirthdayPrintComponent {
+  @Output() birthdays$: any;
+  @Input() print: any;
 
-  @Input() birthdays$: any;
+  constructor(
+    private componentService: ComponentService,
+    public dialog: MatDialog,
+    private route: Router
+    ) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  month(print: string) {
+    console.log(print)
+    this.birthdays$ = this.componentService.listForMonth(print).pipe(
+      catchError(() => {
+        this.onError('Erro ao carregar aniversariantes');
+        return of([]);
+      })
+    );
   }
 
+  onError(errorMsg: string) {
+    this.dialog.open(ErrorDialogComponent, {
+      data: errorMsg,
+    });
+  }
 }

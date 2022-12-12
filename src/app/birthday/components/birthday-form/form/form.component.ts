@@ -4,8 +4,8 @@ import { NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ActivatedRoute } from '@angular/router';
-import { Birthday } from 'src/app/model/birthday';
-import { BirthdaysService } from '../components.service';
+import { Birthday } from 'src/app/birthday/model/Birthday';
+import { BirthdayFormService } from '../birthday-form.service';
 
 @Component({
   selector: 'app-form',
@@ -22,7 +22,7 @@ export class FormComponent {
   });
 
   constructor(
-    private birthdaysService: BirthdaysService,
+    private birthdaysFormService: BirthdayFormService,
     private formBuilder: NonNullableFormBuilder,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
@@ -43,7 +43,7 @@ export class FormComponent {
 
   onSubmit() {
 
-    this.birthdaysService.save(this.form.value).subscribe(
+    this.birthdaysFormService.save(this.form.value).subscribe(
       () => this.onSuccess(),
       () => this.onError()
     );

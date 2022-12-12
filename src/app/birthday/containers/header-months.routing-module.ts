@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormComponent } from '../components/birthday-form/form.component';
-import { BirthdayResolver } from './guards/birthday.resolver';
-import { HeaderMonthsComponent } from './header-months/header-months.component';
+import { ListComponent } from '../components/birthdays-list/birthday-list.component';
+import { HeaderMonthsComponent } from './header-months/header/header-months.component';
 
 const routes: Routes = [
   {
-    path: 'headermonths',
+    path: 'header',
     component: HeaderMonthsComponent,
   },
   {
@@ -15,14 +14,6 @@ const routes: Routes = [
       import('src/app/birthday/components/components.module').then(
         (m) => m.ComponentsModule
       ),
-  },
-  {
-    path: 'new',
-    component: FormComponent, resolve: {birthday: BirthdayResolver}
-  },
-  {
-    path: 'edit/:id',
-    component: FormComponent, resolve: {birthday: BirthdayResolver}
   },
 ];
 

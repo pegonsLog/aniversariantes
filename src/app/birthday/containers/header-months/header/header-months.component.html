@@ -70,7 +70,18 @@
       </mat-grid-tile>
     </mat-grid-list>
   </div>
+  <fragment-list
+    *ngIf="birthdays$ | async as birthdays; else loading"
+    [birthdays]="birthdays"
+  ></fragment-list>
+  <ng-template #loading>
+    <div class="loading-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+</mat-card>
 
+<!--
 <app-birthdays-list
 *ngIf="birthdays$ | async as birthdays; else loading"
 [birthdays]="birthdays"
@@ -83,5 +94,4 @@
 <div class="loading-spinner">
   <mat-spinner></mat-spinner>
 </div>
-</ng-template>
-</mat-card>
+</ng-template> -->

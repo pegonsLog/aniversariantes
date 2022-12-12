@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Birthday } from 'api-birthdays/dist/birthdays/entities/birthday.entity';
 import { first, Observable } from 'rxjs';
-import { Birthday } from 'src/app/model/birthday';
 
 @Injectable({
   providedIn: 'root',

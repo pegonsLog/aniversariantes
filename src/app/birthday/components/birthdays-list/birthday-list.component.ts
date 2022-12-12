@@ -1,27 +1,25 @@
-import { Component, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, first, Observable, of, Subscription } from 'rxjs';
-import { Birthday } from 'src/app/model/birthday';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
-import { HeaderMonthsService } from './header-months.service';
+import { Birthday } from '../../model/Birthday';
+import { ComponentService } from '../components.service';
 
 @Component({
-  selector: 'app-header-months',
-  templateUrl: './header-months.component.html',
-  styleUrls: ['./header-months.component.scss'],
+  selector: 'app-birthdays',
+  templateUrl: './birthday-list.component.html',
+  styleUrls: ['./birthday-list.component.scss'],
 })
-export class HeaderMonthsComponent implements OnDestroy {
+export class ListComponent implements OnDestroy {
   birthdays$: Observable<Birthday[]> | null = null;
-  prints$: Observable<Birthday[]> | null = null;
-
-  @Output() print: EventEmitter<any> = new EventEmitter(false);
-
   subscription: Subscription = new Subscription();
+  @Input() monthMenu: any;
+
   constructor(
-    private headerMonthService: HeaderMonthsService,
     public dialog: MatDialog,
+    private componentService: ComponentService,
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar
@@ -30,23 +28,12 @@ export class HeaderMonthsComponent implements OnDestroy {
   }
 
   refresh() {
-    this.birthdays$ = this.headerMonthService.listAll().pipe(
+    this.componentService.list().pipe(
       catchError(() => {
         this.onError('Erro ao carregar aniversariantes');
         return of([]);
       })
-    );
-  }
-
-  changeMonth(monthMenu: string) {
-    this.birthdays$ = this.headerMonthService.listForMonth(monthMenu).pipe(
-      catchError(() => {
-        this.onError('Erro ao carregar aniversariantes');
-        return of([]);
-      })
-    );
-    this.print.emit(this.birthdays$);
-    this.router.navigate(['components/print'])
+    )
   }
 
   onError(errorMsg: string) {
@@ -54,9 +41,7 @@ export class HeaderMonthsComponent implements OnDestroy {
       data: errorMsg,
     });
   }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+
   onAdd() {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
@@ -66,7 +51,7 @@ export class HeaderMonthsComponent implements OnDestroy {
   }
 
   onRemove(birthday: Birthday) {
-    this.headerMonthService
+    this.componentService
       .remove(birthday.id)
       .pipe(first())
       .subscribe(() => {
@@ -75,6 +60,15 @@ export class HeaderMonthsComponent implements OnDestroy {
           verticalPosition: 'top',
           horizontalPosition: 'center',
         });
+        this.refresh();
       });
+  }
+
+  searchMonth(month: any) {
+    this.monthMenu = month;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

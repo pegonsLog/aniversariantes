@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -28,7 +28,7 @@ export class LoginComponent {
   onSubmit() {
     this.userAuth = this.loginService.userAuth(this.form.value);
     if (this.userAuth) {
-      this.router.navigate(['headermonths']);
+      this.router.navigate(['headermonths/header']);
     } else {
       this.onError();
     }
