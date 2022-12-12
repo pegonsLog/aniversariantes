@@ -16,7 +16,7 @@ const routes: Routes = [
       ).then((m) => m.BirthdayFormModule),
   },
   {
-    path: 'print',
+    path: 'print/:month',
     component: BirthdayPrintComponent,
   },
 ];

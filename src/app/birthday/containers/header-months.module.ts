@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material.module';
 import { SharedModule } from '../../shared/shared.module';
 
-import { ComponentsModule } from '../components/components.module';
 import { HeaderMonthRoutingModule } from './header-months.routing-module';
 import { HeaderMonthsComponent } from './header-months/header/header-months.component';
 
@@ -16,7 +15,6 @@ import { HeaderMonthsComponent } from './header-months/header/header-months.comp
     SharedModule,
     ReactiveFormsModule,
     HeaderMonthRoutingModule,
-    ComponentsModule,
   ],
   exports: [HeaderMonthsComponent],
 })

@@ -9,9 +9,9 @@
   <div class="toolbar-month">
     <mat-grid-list cols="12" rowHeight="3:1">
       <mat-grid-tile>
-        <button mat-button (click)="changeMonth('Jan')">
+        <a [routerLink]="['components/print', 1]">
           {{ "Jan" }}
-        </button>
+        </a>
       </mat-grid-tile>
       <mat-grid-tile>
         <button mat-button (click)="changeMonth('Fev')">
@@ -70,7 +70,7 @@
       </mat-grid-tile>
     </mat-grid-list>
   </div>
-  <fragment-list
+  <!-- <fragment-list
     *ngIf="birthdays$ | async as birthdays; else loading"
     [birthdays]="birthdays"
   ></fragment-list>
@@ -79,7 +79,7 @@
       <mat-spinner></mat-spinner>
     </div>
   </ng-template>
-</mat-card>
+</mat-card> -->
 
 <!--
 <app-birthdays-list

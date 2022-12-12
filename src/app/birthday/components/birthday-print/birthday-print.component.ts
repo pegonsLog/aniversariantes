@@ -1,9 +1,9 @@
 import { Component, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router, ActivatedRoute } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { ComponentService } from '../components.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-birthday-print',
@@ -12,17 +12,20 @@ import { ComponentService } from '../components.service';
 })
 export class BirthdayPrintComponent {
   @Output() birthdays$: any;
-  @Input() print: any;
+  month: string = "";
 
   constructor(
     private componentService: ComponentService,
+    private route: ActivatedRoute,
     public dialog: MatDialog,
-    private route: Router
-    ) {}
+    ) {
+      console.log(this.route)
+    }
 
-  month(print: string) {
-    console.log(print)
-    this.birthdays$ = this.componentService.listForMonth(print).pipe(
+  print() {
+    this.month = this.route.snapshot.params['month']
+    console.log(this.month)
+    this.birthdays$ = this.componentService.listForMonth(this.month).pipe(
       catchError(() => {
         this.onError('Erro ao carregar aniversariantes');
         return of([]);
