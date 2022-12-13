@@ -4,16 +4,11 @@ import { HeaderMonthsComponent } from './header-months/header/header-months.comp
 
 const routes: Routes = [
   {
-    path: 'header',
+    path: '',
     component: HeaderMonthsComponent,
-  },
-
-  {
-    path: 'components',
-    loadChildren: () =>
-      import('src/app/birthday/components/components.module').then(
-        (m) => m.ComponentsModule
-      ),
+    children: [
+      { path: 'formonths/:month', component: HeaderMonthsComponent },
+    ],
   },
 ];
 

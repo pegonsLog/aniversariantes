@@ -1,9 +1,9 @@
-import { Component, Input, Output, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { catchError, of, Subscription} from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { catchError, of } from 'rxjs';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { ComponentService } from '../components.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-birthday-print',
@@ -12,19 +12,22 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BirthdayPrintComponent implements OnInit {
   @Output() birthdays$: any;
-  month: string = "";
+  month: string = '';
 
   constructor(
     private componentService: ComponentService,
     private route: ActivatedRoute,
-    public dialog: MatDialog,
-    ) {
-      this.print();
-    }
+    public dialog: MatDialog
+  ) {
+    this.birthdays$
+    this.print();
+  }
 
   print() {
-    this.month = this.route.snapshot.params['month']
-    console.log(this.month)
+
+    this.month = this.route.snapshot.params['month'];
+    console.log(this.month);
+    // this.clearList();
     this.birthdays$ = this.componentService.listForMonth(this.month).pipe(
       catchError(() => {
         this.onError('Erro ao carregar aniversariantes');
@@ -39,6 +42,11 @@ export class BirthdayPrintComponent implements OnInit {
     });
   }
 
-  ngOnInit(){
-  }
+  ngOnInit() {}
+
+  // clearList() {
+  //   for (let i: any; this.birthdays$.lenght(); i++) {
+  //     this.birthdays$[i] = {};
+  //   }
+  // }
 }

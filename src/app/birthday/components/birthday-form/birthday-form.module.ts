@@ -4,6 +4,7 @@ import { FormComponent } from './form/form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { BirthdayFormRoutingModule } from './birthday-form.routing-module';
 
 @NgModule({
   declarations: [FormComponent],
@@ -12,6 +13,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     AngularMaterialModule,
     ReactiveFormsModule,
     SharedModule,
+    BirthdayFormRoutingModule
   ],
   exports: [FormComponent],
 })

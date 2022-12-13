@@ -8,90 +8,19 @@
   <mat-toolbar color="primary" class="montserrat">Aniversariantes</mat-toolbar>
   <div class="toolbar-month">
     <mat-grid-list cols="12" rowHeight="5:2">
-      <a *ngFor="let month of months" [routerLink]="['/components/print', month.name]">
+      <a *ngFor="let month of months" [routerLink]="['/formonths', month.name]">
         <mat-grid-tile> {{ month.name }}</mat-grid-tile>
       </a>
-
-      <!-- <mat-grid-tile>
-        <button mat-button (click)="changeMonth('Fev')">
-          {{ "Fev" }}
-        </button>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button mat-button (click)="changeMonth('Mar')">
-          {{ "Mar" }}
-        </button>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button mat-button (click)="changeMonth('Abr')">
-          {{ "Abr" }}
-        </button>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button mat-button (click)="changeMonth('Mai')">
-          {{ "Mai" }}
-        </button>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button mat-button (click)="changeMonth('Jun')">
-          {{ "Jun" }}
-        </button>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button mat-button (click)="changeMonth('Jul')">
-          {{ "Jul" }}
-        </button>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button mat-button (click)="changeMonth('Ago')">
-          {{ "Ago" }}
-        </button>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button mat-button (click)="changeMonth('Set')">
-          {{ "Set" }}
-        </button>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button mat-button (click)="changeMonth('Out')">
-          {{ "Out" }}
-        </button>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button mat-button (click)="changeMonth('Nov')">
-          {{ "Nov" }}
-        </button>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button mat-button (click)="changeMonth('Dez')">
-          {{ "Dez" }}
-        </button>
-      </mat-grid-tile> -->
     </mat-grid-list>
+    <fragment-list
+      *ngIf="birthdays$ | async as birthdays; else loading"
+      [birthdays]="birthdays"
+    ></fragment-list>
+
+    <ng-template #loading>
+      <div class="loading-spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
   </div>
-  <!-- <fragment-list
-    *ngIf="birthdays$ | async as birthdays; else loading"
-    [birthdays]="birthdays"
-  ></fragment-list>
-  <ng-template #loading>
-    <div class="loading-spinner">
-      <mat-spinner></mat-spinner>
-    </div>
-  </ng-template>
-</mat-card> -->
-
-  <!--
-<app-birthdays-list
-*ngIf="birthdays$ | async as birthdays; else loading"
-[birthdays]="birthdays"
-(add)="onAdd()"
-(edit)="onEdit($event)"
-(remove)="onRemove($event)"
-></app-birthdays-list>
-
-<ng-template #loading>
-<div class="loading-spinner">
-  <mat-spinner></mat-spinner>
-</div>
-</ng-template> -->
 </mat-card>

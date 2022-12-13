@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from '../shared/angular-material/angular-material.module';
 import { LoginComponent } from './login.component';
-import { HeaderMonthModule } from '../birthday/containers/header-months.module';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -13,7 +12,6 @@ import { HeaderMonthModule } from '../birthday/containers/header-months.module';
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
-    HeaderMonthModule
   ],
   exports: [LoginComponent],
 })

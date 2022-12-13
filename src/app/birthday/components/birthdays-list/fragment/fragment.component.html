@@ -22,7 +22,7 @@
       >Dia do aniversário</mat-header-cell
     >
     <mat-cell *matCellDef="let birthday">
-      {{ birthday.day + "/" + birthday.month}}
+      {{ birthday.day + "/" + birthday.month }}
     </mat-cell>
   </ng-container>
 
@@ -39,10 +39,7 @@
     </mat-header-cell>
 
     <mat-cell *matCellDef="let birthday" class="action-column">
-      <button
-        mat-icon-button
-        aria-label="Editar aniversariante"
-      >
+      <button mat-icon-button aria-label="Editar aniversariante">
         <mat-icon class="green" (click)="onEdit(birthday)">edit</mat-icon>
       </button>
       <button mat-icon-button color="warn" aria-label="Remover aniversariante">

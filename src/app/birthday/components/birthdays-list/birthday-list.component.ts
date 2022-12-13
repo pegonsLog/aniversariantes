@@ -33,7 +33,7 @@ export class ListComponent implements OnDestroy {
         this.onError('Erro ao carregar aniversariantes');
         return of([]);
       })
-    )
+    );
   }
 
   onError(errorMsg: string) {

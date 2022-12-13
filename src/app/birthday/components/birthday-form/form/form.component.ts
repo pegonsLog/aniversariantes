@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ActivatedRoute } from '@angular/router';
 import { Birthday } from 'src/app/birthday/model/Birthday';
-import { BirthdayFormService } from '../birthday-form.service';
+import { ComponentService } from '../../components.service';
 
 @Component({
   selector: 'app-form',
@@ -13,16 +13,15 @@ import { BirthdayFormService } from '../birthday-form.service';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent {
-
   form = this.formBuilder.group({
     id: [0],
     name: [''],
     day: [''],
-    month:['']
+    month: [''],
   });
 
   constructor(
-    private birthdaysFormService: BirthdayFormService,
+    private componentService: ComponentService,
     private formBuilder: NonNullableFormBuilder,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
@@ -42,17 +41,16 @@ export class FormComponent {
   }
 
   onSubmit() {
-
-    this.birthdaysFormService.save(this.form.value).subscribe(
+    this.componentService.save(this.form.value).subscribe(
       () => this.onSuccess(),
       () => this.onError()
     );
-    this.onClear()
+    this.onClear();
   }
 
   private onSuccess() {
     this.snackBar.open('Registro inserido com sucesso!', '', {
-      duration: 1000
+      duration: 1000,
     });
   }
 

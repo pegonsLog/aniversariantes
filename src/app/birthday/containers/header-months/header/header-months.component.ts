@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  Output,
-  EventEmitter,
-  OnInit,
-} from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,8 +16,7 @@ export class HeaderMonthsComponent implements OnDestroy {
   birthdays$: Observable<Birthday[]> | null = null;
   prints$: Observable<Birthday[]> | null = null;
   months: any = [];
-
-  @Output() print: EventEmitter<string> = new EventEmitter(false);
+  month: string = '';
 
   @Output() birthdays: EventEmitter<any> = new EventEmitter(false);
 
@@ -36,15 +29,25 @@ export class HeaderMonthsComponent implements OnDestroy {
     private snackBar: MatSnackBar
   ) {
     this.loadMonth();
+    this.refresh();
   }
 
   loadMonth() {
     this.months = this.headerMonthService.getMonths();
   }
 
-  changeMonth(monthMenu: string) {
-    this.print.emit(monthMenu);
-    this.router.navigate(['components/print']);
+  forMonth() {
+    this.subscription = this.route.params.subscribe(
+      (month: any) => (this.month = month)
+    );
+
+    console.log(this.month);
+    this.birthdays$ = this.headerMonthService.listForMonth(this.month).pipe(
+      catchError(() => {
+        this.onError('Erro ao carregar aniversariantes');
+        return of([]);
+      })
+    );
   }
 
   refresh() {
@@ -61,9 +64,7 @@ export class HeaderMonthsComponent implements OnDestroy {
       data: errorMsg,
     });
   }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  
   onAdd() {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
@@ -74,14 +75,19 @@ export class HeaderMonthsComponent implements OnDestroy {
 
   onRemove(birthday: Birthday) {
     this.headerMonthService
-      .remove(birthday.id)
-      .pipe(first())
-      .subscribe(() => {
-        this.snackBar.open('Registro removido com sucesso!', 'X', {
-          duration: 3000,
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-        });
+    .remove(birthday.id)
+    .pipe(first())
+    .subscribe(() => {
+      this.snackBar.open('Registro removido com sucesso!', 'X', {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
       });
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
+

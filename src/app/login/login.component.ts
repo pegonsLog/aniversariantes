@@ -28,7 +28,7 @@ export class LoginComponent {
   onSubmit() {
     this.userAuth = this.loginService.userAuth(this.form.value);
     if (this.userAuth) {
-      this.router.navigate(['headermonths']);
+      this.router.navigate(['formonths']);
     } else {
       this.onError();
     }

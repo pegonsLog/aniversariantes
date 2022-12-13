@@ -16,14 +16,15 @@ export class LoginService {
   }
 
   getAll() {
-    this.http.get<User[]>(`${this.API}/users`).pipe(first()).subscribe((user: User[]) => {
-      this.users = user;
-    });
+    this.http
+      .get<User[]>(`${this.API}/users`)
+      .pipe(first())
+      .subscribe((user: User[]) => {
+        this.users = user;
+      });
   }
 
   userAuth(user: Partial<User>): boolean {
-
-
     for (let u of this.users) {
       if (user.user == u.user && user.password == u.password) {
         return (this.auth = true);

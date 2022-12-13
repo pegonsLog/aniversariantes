@@ -6,9 +6,10 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { HeaderMonthRoutingModule } from './header-months.routing-module';
 import { HeaderMonthsComponent } from './header-months/header/header-months.component';
+import { FragmentComponent } from '../components/birthdays-list/fragment/fragment.component';
 
 @NgModule({
-  declarations: [HeaderMonthsComponent],
+  declarations: [HeaderMonthsComponent, FragmentComponent],
   imports: [
     CommonModule,
     AngularMaterialModule,
@@ -16,6 +17,6 @@ import { HeaderMonthsComponent } from './header-months/header/header-months.comp
     ReactiveFormsModule,
     HeaderMonthRoutingModule,
   ],
-  exports: [HeaderMonthsComponent],
+  exports: [HeaderMonthsComponent, FragmentComponent],
 })
 export class HeaderMonthModule {}

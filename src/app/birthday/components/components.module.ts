@@ -4,17 +4,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material.module';
 
-import { ComponentsRoutingModule } from './components.routing-module';
+import { FormComponent } from './birthday-form/form/form.component';
 import { BirthdayPrintComponent } from './birthday-print/birthday-print.component';
 import { ListComponent } from './birthdays-list/birthday-list.component';
-import { FragmentComponent } from './birthdays-list/fragment/fragment.component';
+import { ComponentsRoutingModule } from './components.routing-module';
 
 @NgModule({
-  declarations: [
-    ListComponent,
-    FragmentComponent,
-    BirthdayPrintComponent,
-  ],
+  declarations: [ListComponent, BirthdayPrintComponent],
   imports: [
     CommonModule,
     ComponentsRoutingModule,
@@ -22,10 +18,6 @@ import { FragmentComponent } from './birthdays-list/fragment/fragment.component'
     ReactiveFormsModule,
     SharedModule,
   ],
-  exports: [
-    ListComponent,
-    FragmentComponent,
-    BirthdayPrintComponent,
-  ],
+  exports: [ListComponent, BirthdayPrintComponent],
 })
 export class ComponentsModule {}

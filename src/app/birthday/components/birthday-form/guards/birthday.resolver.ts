@@ -6,19 +6,19 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Birthday } from 'src/app/birthday/model/Birthday';
-import { BirthdayFormService } from '../birthday-form.service';
+import { ComponentService } from '../../components.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BirthdayResolver implements Resolve<Birthday> {
-  constructor(private birthdayFormService: BirthdayFormService) {}
+  constructor(private componentService: ComponentService) {}
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<Birthday> {
     if (route.params && route.params['id']) {
-      return this.birthdayFormService.loadById(route.params['id']);
+      return this.componentService.loadById(route.params['id']);
     }
     return of({ id: 0, name: '', day: '', month: '' });
   }
