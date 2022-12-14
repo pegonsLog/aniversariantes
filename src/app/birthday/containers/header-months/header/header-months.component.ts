@@ -16,7 +16,6 @@ export class HeaderMonthsComponent implements OnDestroy {
   birthdays$: Observable<Birthday[]> | null = null;
   prints$: Observable<Birthday[]> | null = null;
   months: any = [];
-  month: string = '';
 
   @Output() birthdays: EventEmitter<any> = new EventEmitter(false);
 
@@ -36,18 +35,13 @@ export class HeaderMonthsComponent implements OnDestroy {
     this.months = this.headerMonthService.getMonths();
   }
 
-  forMonth() {
-    this.subscription = this.route.params.subscribe(
-      (month: any) => (this.month = month)
-    );
-
-    console.log(this.month);
-    this.birthdays$ = this.headerMonthService.listForMonth(this.month).pipe(
-      catchError(() => {
-        this.onError('Erro ao carregar aniversariantes');
-        return of([]);
-      })
-    );
+  forMonth(month: string) {
+    // this.subscription = this.headerMonthService.listForMonth(month).subscribe((b: any) => {this.birthdays$ = b},
+    //   catchError(() => {
+    //     this.onError('Erro ao carregar aniversariantes');
+    //     return of([]);
+    //   }
+    // ))
   }
 
   refresh() {
@@ -64,7 +58,7 @@ export class HeaderMonthsComponent implements OnDestroy {
       data: errorMsg,
     });
   }
-  
+
   onAdd() {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
@@ -75,19 +69,18 @@ export class HeaderMonthsComponent implements OnDestroy {
 
   onRemove(birthday: Birthday) {
     this.headerMonthService
-    .remove(birthday.id)
-    .pipe(first())
-    .subscribe(() => {
-      this.snackBar.open('Registro removido com sucesso!', 'X', {
-        duration: 3000,
-        verticalPosition: 'top',
-        horizontalPosition: 'center',
+      .remove(birthday.id)
+      .pipe(first())
+      .subscribe(() => {
+        this.snackBar.open('Registro removido com sucesso!', 'X', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+        });
       });
-    });
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }
-

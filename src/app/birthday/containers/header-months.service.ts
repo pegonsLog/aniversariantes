@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Birthday } from 'api-birthdays/dist/birthdays/entities/birthday.entity';
-import { first, Observable } from 'rxjs';
+import { filter, first, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -34,10 +34,8 @@ export class HeaderMonthsService {
     return this.http.get<Birthday[]>(`${this.API}/birthdays`).pipe(first());
   }
 
-  listForMonth(month: string): Observable<Birthday[]> {
-    return this.http
-      .get<Birthday[]>(`${this.API}/birthdays/${month}`)
-      .pipe(first());
+  listForMonth(month: string) {
+   // return this.listAll().pipe(map((ev: any) => ev.month === month));
   }
 
   loadById(id: number) {
