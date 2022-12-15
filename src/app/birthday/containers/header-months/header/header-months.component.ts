@@ -1,10 +1,9 @@
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Birthday } from 'api-birthdays/dist/birthdays/entities/birthday.entity';
-import { catchError, first, Observable, of, Subscription } from 'rxjs';
-import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
+import { first, Observable, Subscription } from 'rxjs';
 import { HeaderMonthsService } from '../../header-months.service';
 
 @Component({
@@ -12,8 +11,8 @@ import { HeaderMonthsService } from '../../header-months.service';
   templateUrl: './header-months.component.html',
   styleUrls: ['./header-months.component.scss'],
 })
-export class HeaderMonthsComponent implements OnDestroy {
-  birthdays$: Observable<Birthday[]> | null = null;
+export class HeaderMonthsComponent {
+  birthdays$ = this.headerMonthService.listAll();
   prints$: Observable<Birthday[]> | null = null;
   months: any = [];
 
@@ -28,7 +27,6 @@ export class HeaderMonthsComponent implements OnDestroy {
     private snackBar: MatSnackBar
   ) {
     this.loadMonth();
-    this.refresh();
   }
 
   loadMonth() {
@@ -36,27 +34,7 @@ export class HeaderMonthsComponent implements OnDestroy {
   }
 
   forMonth(month: string) {
-    // this.subscription = this.headerMonthService.listForMonth(month).subscribe((b: any) => {this.birthdays$ = b},
-    //   catchError(() => {
-    //     this.onError('Erro ao carregar aniversariantes');
-    //     return of([]);
-    //   }
-    // ))
-  }
-
-  refresh() {
-    this.birthdays$ = this.headerMonthService.listAll().pipe(
-      catchError(() => {
-        this.onError('Erro ao carregar aniversariantes');
-        return of([]);
-      })
-    );
-  }
-
-  onError(errorMsg: string) {
-    this.dialog.open(ErrorDialogComponent, {
-      data: errorMsg,
-    });
+    //this.birthdays$ = this.headerMonthService.listForMonth(month);
   }
 
   onAdd() {
@@ -78,9 +56,5 @@ export class HeaderMonthsComponent implements OnDestroy {
           horizontalPosition: 'center',
         });
       });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }
