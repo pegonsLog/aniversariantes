@@ -3,11 +3,10 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Birthday } from 'api-birthdays/dist/birthdays/entities/birthday.entity';
 import {
-  catchError,
-  first,
+  catchError, filter, first,
   map,
   Observable,
-  of,
+  of
 } from 'rxjs';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { Birthdays } from '../model/Birthday';
@@ -18,20 +17,7 @@ import { Birthdays } from '../model/Birthday';
 export class HeaderMonthsService {
   private readonly API = 'http://localhost:3000';
 
-  private months = [
-    { name: 'Jan' },
-    { name: 'Fev' },
-    { name: 'Mar' },
-    { name: 'Abr' },
-    { name: 'Mai' },
-    { name: 'Jun' },
-    { name: 'Jul' },
-    { name: 'Ago' },
-    { name: 'Set' },
-    { name: 'Out' },
-    { name: 'Nov' },
-    { name: 'Dez' },
-  ];
+  private months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
 
   constructor(private http: HttpClient, public dialog: MatDialog) {}
 
@@ -56,6 +42,8 @@ export class HeaderMonthsService {
 
   listForMonth(month: string) {
     console.log(month);
+    return this.http.get<any>(`${this.API}/birthdays`).pipe(filter((x: Birthday) => x.name == month));
+
   }
 
   loadById(id: number) {

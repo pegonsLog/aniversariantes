@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,10 +13,11 @@ import { HeaderMonthsService } from '../../header-months.service';
 })
 export class HeaderMonthsComponent {
   birthdays$ = this.headerMonthService.listAll();
-  prints$: Observable<Birthday[]> | null = null;
-  months: any = [];
 
-  @Output() birthdays: EventEmitter<any> = new EventEmitter(false);
+  prints$: Observable<Birthday[]> | null = null;
+  months: string[] = [];
+
+  //@Output() birthdays: EventEmitter<any> = new EventEmitter(false);
 
   subscription: Subscription = new Subscription();
   constructor(
@@ -34,7 +35,6 @@ export class HeaderMonthsComponent {
   }
 
   forMonth(month: string) {
-    //this.birthdays$ = this.headerMonthService.listForMonth(month);
   }
 
   onAdd() {
