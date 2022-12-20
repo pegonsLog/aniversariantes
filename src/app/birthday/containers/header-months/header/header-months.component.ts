@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Birthday } from 'api-birthdays/dist/birthdays/entities/birthday.entity';
-import { first, Observable, Subscription } from 'rxjs';
+import { first, Observable, of, Subscription } from 'rxjs';
 import { HeaderMonthsService } from '../../header-months.service';
+import { Birthdays } from './../../../model/Birthday';
 
 @Component({
   selector: 'app-header-months',
   templateUrl: './header-months.component.html',
   styleUrls: ['./header-months.component.scss'],
 })
-export class HeaderMonthsComponent {
+export class HeaderMonthsComponent implements OnDestroy {
   birthdays$ = this.headerMonthService.listAll();
 
   prints$: Observable<Birthday[]> | null = null;
@@ -34,7 +35,14 @@ export class HeaderMonthsComponent {
     this.months = this.headerMonthService.getMonths();
   }
 
+  forAll(){
+    this.birthdays$ = this.headerMonthService.listAll();
+  }
+
   forMonth(month: string) {
+    this.subscription = this.headerMonthService
+      .listForMonth(month)
+      .subscribe((b: Birthdays) => (this.birthdays$ = of(b)));
   }
 
   onAdd() {
@@ -56,5 +64,8 @@ export class HeaderMonthsComponent {
           horizontalPosition: 'center',
         });
       });
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

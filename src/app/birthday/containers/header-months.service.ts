@@ -1,25 +1,40 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Birthday } from 'api-birthdays/dist/birthdays/entities/birthday.entity';
-import {
-  catchError, filter, first,
-  map,
-  Observable,
-  of
-} from 'rxjs';
+import { catchError, first, map, Observable, of, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { Birthdays } from '../model/Birthday';
 
 @Injectable({
   providedIn: 'root',
 })
-export class HeaderMonthsService {
+export class HeaderMonthsService implements OnDestroy{
   private readonly API = 'http://localhost:3000';
 
-  private months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+  private subscription = new Subscription();
+
+  private months = [
+    'Jan',
+    'Fev',
+    'Mar',
+    'Abr',
+    'Mai',
+    'Jun',
+    'Jul',
+    'Ago',
+    'Set',
+    'Out',
+    'Nov',
+    'Dez'
+  ];
 
   constructor(private http: HttpClient, public dialog: MatDialog) {}
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   getMonths() {
     return this.months;
@@ -40,10 +55,12 @@ export class HeaderMonthsService {
     );
   }
 
-  listForMonth(month: string) {
-    console.log(month);
-    return this.http.get<any>(`${this.API}/birthdays`).pipe(filter((x: Birthday) => x.name == month));
-
+  listForMonth(month: string): Observable<Birthdays> {
+    return this.http
+      .get<Birthdays>(`${this.API}/birthdays`)
+      .pipe(
+        map((birtdays: Birthdays) => birtdays.filter((x) => x.month === month))
+      );
   }
 
   loadById(id: number) {
