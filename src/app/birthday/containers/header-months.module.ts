@@ -9,7 +9,7 @@ import { HeaderMonthRoutingModule } from './header-months.routing-module';
 import { HeaderMonthsComponent } from './header-months/header/header-months.component';
 
 @NgModule({
-  declarations: [HeaderMonthsComponent, FragmentComponent],
+  declarations: [HeaderMonthsComponent],
   imports: [
     CommonModule,
     AngularMaterialModule,
@@ -17,6 +17,6 @@ import { HeaderMonthsComponent } from './header-months/header/header-months.comp
     ReactiveFormsModule,
     HeaderMonthRoutingModule,
   ],
-  exports: [HeaderMonthsComponent, FragmentComponent],
+  exports: [HeaderMonthsComponent],
 })
 export class HeaderMonthModule {}

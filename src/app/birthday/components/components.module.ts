@@ -6,10 +6,11 @@ import { AngularMaterialModule } from '../../shared/angular-material/angular-mat
 
 import { BirthdayPrintComponent } from './birthday-print/birthday-print.component';
 import { ListComponent } from './birthdays-list/birthday-list.component';
+import { FragmentComponent } from './birthdays-list/fragment/fragment.component';
 import { ComponentsRoutingModule } from './components.routing-module';
 
 @NgModule({
-  declarations: [ListComponent, BirthdayPrintComponent],
+  declarations: [ListComponent, BirthdayPrintComponent, FragmentComponent],
   imports: [
     CommonModule,
     ComponentsRoutingModule,
@@ -17,6 +18,6 @@ import { ComponentsRoutingModule } from './components.routing-module';
     ReactiveFormsModule,
     SharedModule,
   ],
-  exports: [ListComponent, BirthdayPrintComponent],
+  exports: [ListComponent, BirthdayPrintComponent, FragmentComponent],
 })
 export class ComponentsModule {}
